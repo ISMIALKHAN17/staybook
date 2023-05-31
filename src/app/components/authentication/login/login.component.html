@@ -3,60 +3,68 @@
         <img src="../../../../assets/img/logo.png" alt="">
     </div>
     <div class="main_auth_wrap">
-
-
-    <ng-container *ngIf="screen == 'login'">
-        <div [@slideFade] (@slideFade.done)="onAnimationDone($event)" class="authentication_wrap">
-          <!-- Content for login screen --><div class="head">
-            Login
-        </div>
-        <div class="auth_body">
-            <h2>Welcome to Staybook</h2>
-        <div class="input_wrap">
-            <div class="input_icon">
-                <i class="fa-solid fa-user"></i>
-            </div>
-            <input type="text" placeholder="Username">
-        </div>
-        <div class="input_wrap" placement="bottom">
-            <div class="input_icon" >
-                <i class="fa fa-lock"></i>
-            </div>
-            <input type="password" placeholder="Password">
-        </div>
-        <div class="d-flex align-items-center justify-content-between" >
-            <a (click)="changeScreen('forgot-password')">Forgot Password?</a>
-            <button class="theme_btn">Login</button>
-        </div>
-        <ng-template #tipContent>Incorect Password</ng-template>
-        </div>   
+        <ng-container *ngIf="screen == 'login'">
+            <div [@slideFade] (@slideFade.done)="onAnimationDone($event)" class="authentication_wrap">
+                <!-- Content for login screen --><div class="head">
+                    Login
+                </div>
+                <div class="auth_body">
+                    <form [formGroup]="loginForm" (ngSubmit)="login()">
+                      <h2>Welcome to Staybook</h2>
+                      <div class="input_wrap" [ngClass]="{ 'input_error': loginForm.get('username').invalid && loginForm.get('username').touched }">
+                        <div class="input_icon">
+                          <i class="fa-solid fa-user"></i>
+                        </div>
+                        <input type="text" formControlName="username" placeholder="Username">
+                      </div>
+                      <div class="input_wrap" placement="bottom" [ngClass]="{ 'input_error': loginForm.get('password').invalid && loginForm.get('password').touched }">
+                        <div class="input_icon">
+                          <i class="fa fa-lock"></i>
+                        </div>
+                        <input type="password" formControlName="password" placeholder="Password">
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between">
+                        <a (click)="changeScreen('forgot-password')">Forgot Password?</a>
+                        <button class="theme_btn" type="submit" [disabled]="loading" >
+                          <span class="loader" *ngIf="loading"></span>
+                          <span *ngIf="!loading">Login</span>
+                        </button>
+                      </div>
+                      <ng-template #tipContent>Incorrect Password</ng-template>
+                    </form>
+                  </div>
         <div class="auth_footer">
-            
         </div>  
         </div>
       </ng-container>
-      
       <ng-container *ngIf="screen == 'forgot-password' && showForgotPassword">
         <div [@slideFade] (@slideFade.done)="onAnimationDone($event)" class="authentication_wrap">
             <div class="head">
                 Forgot Password
             </div>
             <div class="auth_body">
-                <h3>Forgot Password ?</h3>
-                <p>Enter  your email address to retrieve
-                    your password</p>
-            <div class="input_wrap">
-                <div class="input_icon">
-                    <i class="fa fa-envelope"></i>
-                </div>
-                <input type="text" placeholder="Email">
-            </div>
-            <div class="d-flex align-items-center justify-content-between" >
-                <a (click)="changeScreen('login')">Back to login</a>
-                <button class="theme_btn" (click)="changeScreen('reset-your-password')">send</button>
-            </div>
-            <ng-template #tipContent>Incorect Password</ng-template>
-            </div>   
+                <form [formGroup]="forgotForm" (ngSubmit)="forgotPassword()">
+                  <h3>Forgot Password?</h3>
+                  <p>Enter your email address to retrieve your password</p>
+                  <div class="input_wrap" [ngClass]="{ 'input_error': forgotForm.get('email').invalid && forgotForm.get('email').touched || forgotForm.get('email').hasError('email') }">
+                    <div class="input_icon">
+                      <i class="fa fa-envelope"></i>
+                    </div>
+                    <input type="text" formControlName="email" placeholder="Email" [attr.title]="tipContent" [ngbTooltip]="tipContent" [class.tooltip-disabled]="!forgotForm.get('email').invalid || !forgotForm.get('email').touched">
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between">
+                    <a (click)="changeScreen('login')">Back to login</a>
+                    <button class="theme_btn" type="submit" [disabled]="loading">
+                        <span class="loader" *ngIf="loading"></span>
+                        <span *ngIf="!loading">Login</span>
+                      </button>
+                  </div>
+                  <ng-template #tipContent>
+                    <div *ngIf="forgotForm.get('email').hasError('required')">Email is required.</div>
+                    <div *ngIf="forgotForm.get('email').hasError('email')">Please enter a valid email address.</div>
+                  </ng-template>
+                </form>
+              </div>
             <div class="auth_footer">
             </div>  
         </div>
@@ -70,23 +78,22 @@
                 <p>How do you want to receive the 
                     code to reset your password?</p>
                     <form class="form">
-                       <ul>
-                        <li> 
-                            <label for="01">Send code via email <span>ism********1@gmail.com</span></label>
+                        <ul>
+                          <li>
+                            <label for="01">Send code via email <span>{{ maskEmail(responseData.email) }}</span></label>
                             <input id="01" type="radio" name="r" value="1" checked="">
-                        </li>
-                        <li>
-                                    <label for="02">Send code via SMS <span>+**********12</span></label>
-                                    <input id="02" type="radio" name="r" value="2">
-                        </li>
-                       </ul>
-                        
-                    </form>
+                          </li>
+                          <li>
+                            <label for="02">Send code via SMS <span>{{ maskPhoneNumber(responseData.phone_number) }}</span></label>
+                            <input id="02" type="radio" name="r" value="2">
+                          </li>
+                        </ul>
+                      </form>                      
             </div>   
             <div class="auth_footer">
                 <div class="d-flex justify-content-between align-items-center">
                     <a (click)="changeScreen('forgot-password')" ><i class="fa-regular fa-arrow-left"></i></a>
-                    <a (click)="changeScreen('email-otp') ; startTimer()">Continue</a>
+                    <button class="no-border-btn"  (click)="forgotSendMail()"><span *ngIf="loading" class="loader"></span><span *ngIf="!loading">Continue</span></button>
                 </div>
             </div>  
         </div>
@@ -98,24 +105,28 @@
             </div>
             <div class="auth_body">
                 <h3>Confirm your email address</h3>
-                <p>Please check your email for a 5-digit password and enter it below to confirm
-                    your email.</p>
+                <p>Please check your email, including your spam folder, for a 5-digit password. Enter the password below to confirm your email.</p>
             <div class="input_wrap">
                 <div class="input_icon">
                     <i class="fa-solid fa-lock"></i>
                 </div>
-                <input type="text" placeholder="5 digit code">
+                <input type="text" placeholder="5 digit code" [(ngModel)]="otpPassword">
             </div>
-            <div class="d-flex align-items-center justify-content-between" >
-                <span>Didn’t get email ? <a aria-disabled="true">Resend</a> in {{timer}} Seconds</span>
-                
-                <button class="theme_btn" (click)="changeScreen('new-password')">Confirm</button>
-            </div>
-            <ng-template #tipContent>Incorect Password</ng-template>
+            <div class="d-flex align-items-center justify-content-between">
+                <span>
+                  Didn't get email? 
+                  <a [ngClass]="{ 'disabled-link': resendDisabled }" (click)="resendDisabled ? null : resendEmail()">Resend</a>
+                  <span *ngIf="resendDisabled!"> in {{ timer }} Seconds</span>
+                </span>
+                <button  class="theme_btn" (click)="verifyEmail()">
+                    <span *ngIf="!loading">Verify</span>
+                    <span class="loader" *ngIf="loading"></span>
+                </button>
+              </div>
             </div>
             <div class="auth_footer">
                 <div class="d-flex justify-content-between align-items-center">
-                    <a (click)="changeScreen('reset-your-password')" ><i class="fa-regular fa-arrow-left"></i></a>
+                    <a (click)="changeScreen('forgot-password')" ><i class="fa-regular fa-arrow-left"></i></a>
                 </div>
             </div>  
         </div>
@@ -150,35 +161,37 @@
       </ng-container>
       <ng-container *ngIf="screen == 'new-password' && showForgotPassword">
         <div [@slideFade] (@slideFade.done)="onAnimationDone($event)" class="authentication_wrap">
-            <div class="head">
-                Enter New Password
-            </div>
-            <div class="auth_body">
-                <h3>Enter New Password</h3>
-            <div class="input_wrap">
+          <div class="head">
+            Enter New Password
+          </div>
+          <div class="auth_body">
+            <h3>Enter New Password</h3>
+            <form [formGroup]="passwordForm" (ngSubmit)="changePassword()">
+              <div class="input_wrap" [ngClass]="{ 'input_error': passwordForm.hasError('passwordMismatch') }">
                 <div class="input_icon">
-                    <i class="fa-solid fa-lock"></i>
+                  <i class="fa-solid fa-lock"></i>
                 </div>
-                <input type="text" placeholder="New Password">
-            </div>
-            <div class="input_wrap">
+                <input type="password" formControlName="password" placeholder="New Password">
+              </div>
+              <div class="input_wrap" [ngClass]="{ 'input_error': passwordForm.hasError('passwordMismatch') }">
                 <div class="input_icon">
-                    <i class="fa-solid fa-lock"></i>
+                  <i class="fa-solid fa-lock"></i>
                 </div>
-                <input type="text" placeholder="Confirm Password">
+                <input type="password" formControlName="confirmPassword" placeholder="Confirm Password">
+              </div>
+              <div class="d-flex align-items-center justify-content-end">
+                <button class="theme_btn" [disabled]="passwordForm.invalid">
+                    <span *ngIf="!loading">Change Password</span>
+                    <span *ngIf="loading" class="loader"></span>
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="auth_footer">
+            <div class="d-flex justify-content-between align-items-center">
+              <a (click)="changeScreen('reset-your-password')"><i class="fa-regular fa-arrow-left"></i></a>
             </div>
-            <div class="d-flex align-items-center justify-content-end" >
-                
-                
-                <button class="theme_btn" (click)="changeScreen('Verified')">Change Password</button>
-            </div>
-            <ng-template #tipContent>Incorect Password</ng-template>
-            </div>
-            <div class="auth_footer">
-                <div class="d-flex justify-content-between align-items-center">
-                    <a (click)="changeScreen('reset-your-password')" ><i class="fa-regular fa-arrow-left"></i></a>
-                </div>
-            </div>  
+          </div>  
         </div>
       </ng-container>
       <ng-container *ngIf="screen == 'Verified' && showForgotPassword">
@@ -199,3 +212,4 @@
       </ng-container>
 </div>
 </div>
+<app-toasts-container></app-toasts-container>

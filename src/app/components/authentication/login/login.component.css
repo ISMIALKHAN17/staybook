@@ -127,3 +127,7 @@
     color: #000;
     margin-bottom: 50px;
 }
+
+.auth_body span{
+  text-align: left;
+}

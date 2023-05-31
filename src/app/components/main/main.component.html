@@ -1,0 +1,126 @@
+<div class="container">
+    <input id="menu__toggle" type="checkbox" />
+    <label class="menu__btn" for="menu__toggle">
+      <span></span>
+    </label>
+    <nav class="sidebar" [ngClass]="{'close': isSidebarClosed}">
+      <header>
+        <div class="image-text">
+          <span class="image">
+            <img src="../../../assets/img/fav_icon.png" alt="">
+          </span>
+  
+          <div class="text logo-text">
+            <span class="name">Staybook</span>
+          </div>
+        </div>
+  
+        <i class='fa-solid fa-chevron-right toggle' (click)="toggleSidebar()"></i>
+      </header>
+  
+      <div class="menu-bar">
+        <div class="menu">
+  
+          <ul class="menu-links">
+            <li class="nav-link" routerLinkActive="active">
+              <a routerLink="home">
+                <i class="fa-solid fa-house icon"></i>
+                <span class="text nav-text">Home</span>
+              </a>
+            </li>
+            <li class="nav-link">
+              <a href="#">
+                <i class="fa-solid fa-chart-pie icon"></i>
+                <span class="text nav-text">Dashboard</span>
+              </a>
+            </li>
+  
+            <li class="nav-link" routerLinkActive="active">
+              <a routerLink="emails">
+                <i class="fa-solid fa-calendar-check icon"></i>
+                <span class="text nav-text">Bookings</span>
+              </a>
+            </li>
+            <li class="nav-link" routerLinkActive="active">
+              <a routerLink="company">
+                <i class="fa-solid fa-house-circle-check icon"></i>
+                <span class="text nav-text">Stays</span>
+              </a>
+            </li>
+            <li class="nav-link" routerLinkActive="active">
+              <a routerLink="hotel-setup">
+                <i class="fa-solid fa-hotel icon"></i>
+                <span class="text nav-text">Hotel Setup</span>
+              </a>
+            </li>
+            <li class="nav-link" routerLinkActive="active">
+              <a routerLink="rooms">
+                <i class="fa-solid fa-door-open icon"></i>
+                <span class="text nav-text">Rooms</span>
+              </a>
+            </li>
+            <li class="nav-link">
+              <a href="#">
+                <i class="fa-solid fa-chart-line icon"></i>
+                <span class="text nav-text">Reports</span>
+              </a>
+            </li>
+            <li class="nav-link">
+              <a href="#">
+                <i class="fa-solid fa-file-invoice-dollar icon"></i>
+                <span class="text nav-text">Rate Plan</span>
+              </a>
+            </li>
+            <li class="nav-link">
+              <a href="#">
+                <i class="fa-solid fa-gear icon"></i>
+                <span class="text nav-text">Settings</span>
+              </a>
+            </li>
+            <li class="nav-link">
+              <a href="#">
+                <i class="fa-solid fa-arrow-right-from-bracket icon"></i>
+                <span class="text nav-text">Sign Out</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="bottom-content">
+          <li>
+            <a href="#">
+              <i class='bx bx-log-out icon'></i>
+              <span class="text nav-text">Sign Out</span>
+            </a>
+          </li>
+        </div>
+      </div>
+    </nav>
+    <section class="home">
+        <div class="header d-flex justify-content-between align-items-center">
+            <h2>Home</h2>
+            <div class="header_side d-flex gap-2 align-items-center">
+              <div class="hotel_status">
+                <span> Hotel Status</span>
+                <label class="switch">
+                  <input type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+                <div class="notification">
+                    <i class="fa-regular fa-bell"></i>
+                </div>
+                <div class="user d-flex align-items-center gap-2">
+                    <div class="user_image">
+                        <img src="../../../assets/img/user_placeholder.jpg" alt="">
+                    </div>
+                    <div class="user_info">
+                        <h4>Ismail</h4>
+                        <h6>Admin</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <router-outlet></router-outlet>
+    </section>  
+  </div>
+  

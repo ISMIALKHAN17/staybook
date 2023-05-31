@@ -1,0 +1,247 @@
+<div class="global_component_wrap">
+   <div class="global_component_header h-radius">
+    <h4>Setup your Hotel</h4>
+   </div>
+   <div class="row p-2">
+    <div class="col-md-4">
+        <div class="g_input_wrap">
+            <label>Name</label>
+            <div class="g_input">
+                <input type="text" placeholder="Enter your name"> 
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="g_input_wrap">
+            <label>Email</label>
+            <div class="g_input">
+                <input type="email" placeholder="Enter your email"> 
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="g_input_wrap">
+            <label>Contact</label>
+            <div class="g_input">
+                <input type="text" placeholder="Enter hotel phone number"> 
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="g_input_wrap">
+            <label>Rooms</label>
+            <div class="g_input">
+                <input type="number" placeholder="Enter rooms quantity"> 
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="g_input_wrap">
+            <label>Address line 1</label>
+            <div class="g_input">
+                <input type="text" placeholder="Stree address"> 
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="g_input_wrap">
+            <label>Address line 2</label>
+            <div class="g_input">
+                <input type="text" placeholder="Stree address"> 
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="g_input_wrap">
+            <label>Country</label>
+            <div class="g_input">
+                <input type="text" placeholder="Pakistan"> 
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="g_input_wrap">
+            <label>State</label>
+            <div class="g_input">
+                <input type="text" placeholder="Sindh"> 
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="g_input_wrap">
+            <label>City</label>
+            <div class="g_input">
+                <input type="text" placeholder="Enter city name"> 
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="g_input_wrap">
+            <label>Postal Code</label>
+            <div class="g_input">
+                <input type="text" placeholder="Enter postal code"> 
+            </div>
+        </div>
+    </div>
+   </div>
+   <div class="global_component_header">
+    <h4>Images</h4>
+   </div>
+   <div class="row p-2 add_images_row">
+    <div class="col-3" *ngFor="let image of images; let i = index">
+      <div class="image-container">
+        <img [src]="image.url" alt="">
+        <div class="overlay">
+          <div class="remove-icon" (click)="removeImage(i)">
+            <i class="fa-solid fa-times"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-3" *ngIf="images.length < 4">
+      <div class="add_image">
+        <i class="fa-solid fa-circle-plus"></i>
+        <input type="file" (change)="onFileChange($event)">
+      </div>
+    </div>
+  </div>
+  <div class="global_component_header">
+    <h4>Popular Amenities</h4>
+  </div>
+  <div class="row p-3 ">
+    <div class="col-md-3">
+    <div class="amenities">
+    <h5><i class="fa-solid fa-plane-departure"></i> Airport Shuttle</h5>
+    <div class="checkbox-wrapper-4">
+        <input type="checkbox" id="free" class="inp-cbx">
+        <label for="free" class="cbx"><span>
+        <svg height="10px" width="12px">
+          
+        </svg></span><span>Free</span></label>
+      </div>
+      <div class="checkbox-wrapper-4">
+        <input type="checkbox" id="paid" class="inp-cbx">
+        <label for="paid" class="cbx"><span>
+        <svg height="10px" width="12px">
+          
+        </svg></span><span>Paid</span></label>
+      </div>
+      <div class="checkbox-wrapper-4">
+        <input type="checkbox" id="Airport drop off" class="inp-cbx">
+        <label for="Airport drop off" class="cbx"><span>
+        <svg height="10px" width="12px">
+          
+        </svg></span><span>Airport drop off</span></label>
+      </div>
+      <div class="checkbox-wrapper-4">
+        <input type="checkbox" id="Airport pick up" class="inp-cbx">
+        <label for="Airport pick up" class="cbx"><span>
+        <svg height="10px" width="12px">
+          
+        </svg></span><span>Airport pick up</span></label>
+      </div>
+      
+</div>
+    </div>
+    <div class="col-md-3">
+    <div class="amenities">
+    <h5><i class="fa-solid fa-martini-glass"></i> Bar</h5>
+    <div class="checkbox-wrapper-4">
+        <input type="checkbox" id="Huge Bar" class="inp-cbx">
+        <label for="Huge Bar" class="cbx"><span>
+        <svg height="10px" width="12px">
+          
+        </svg></span><span>Huge Bar</span></label>
+      </div>
+      <div class="checkbox-wrapper-4">
+        <input type="checkbox" id="Happy hour" class="inp-cbx">
+        <label for="Happy hour" class="cbx"><span>
+        <svg height="10px" width="12px">
+          
+        </svg></span><span>Happy hour</span></label>
+      </div>
+      <div class="checkbox-wrapper-4">
+        <input type="checkbox" id="Mini Bar" class="inp-cbx">
+        <label for="Mini Bar" class="cbx"><span>
+        <svg height="10px" width="12px">
+          
+        </svg></span><span>Mini Bar</span></label>
+      </div>
+      <div class="checkbox-wrapper-4">
+        <input type="checkbox" id="Pool bar" class="inp-cbx">
+        <label for="Pool bar" class="cbx"><span>
+        <svg height="10px" width="12px">
+          
+        </svg></span><span>Pool bar</span></label>
+      </div>
+      
+</div>
+    </div>
+    <div class="col-md-3">
+    <div class="amenities">
+    <h5><i class="fa-solid fa-wifi"></i>Free Wifi</h5>
+    <div class="checkbox-wrapper-4">
+        <input type="checkbox" id="Free all around" class="inp-cbx">
+        <label for="Free all around" class="cbx"><span>
+        <svg height="10px" width="12px">
+          
+        </svg></span><span>Free all around</span></label>
+      </div>
+      <div class="checkbox-wrapper-4">
+        <input type="checkbox" id="Free in public areas" class="inp-cbx">
+        <label for="Free in public areas" class="cbx"><span>
+        <svg height="10px" width="12px">
+          
+        </svg></span><span>Free in public areas</span></label>
+      </div>
+      <div class="checkbox-wrapper-4">
+        <input type="checkbox" id="Paid in room" class="inp-cbx">
+        <label for="Paid in room" class="cbx"><span>
+        <svg height="10px" width="12px">
+          
+        </svg></span><span>Paid in rooms</span></label>
+      </div>
+      <div class="checkbox-wrapper-4">
+        <input type="checkbox" id="Free in rooms" class="inp-cbx">
+        <label for="Free in rooms" class="cbx"><span>
+        <svg height="10px" width="12px">
+          
+        </svg></span><span>Free in rooms</span></label>
+      </div>
+      
+</div>
+    </div>
+    <div class="col-md-3">
+    <div class="amenities">
+    <h5><i class="fa-solid fa-ban-smoking"></i> Smoking</h5>
+    <div class="checkbox-wrapper-4">
+        <input type="checkbox" id="Smoking gallery’s" class="inp-cbx">
+        <label for="Smoking gallery’s" class="cbx"><span>
+        <svg height="10px" width="12px">
+          
+        </svg></span><span>Smoking gallery’s</span></label>
+      </div>
+      <div class="checkbox-wrapper-4">
+        <input type="checkbox" id="Not allowed" class="inp-cbx">
+        <label for="Not allowed" class="cbx"><span>
+        <svg height="10px" width="12px">
+          
+        </svg></span><span>Not allowed</span></label>
+      </div>
+      <div class="checkbox-wrapper-4">
+        <input type="checkbox" id="Allowed" class="inp-cbx">
+        <label for="Allowed" class="cbx"><span>
+        <svg height="10px" width="12px">
+          
+        </svg></span><span>Allowed</span></label>
+      </div>
+      
+</div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end py-3 px-2">
+    <button class="theme_btn">Save</button>
+  </div>
+  
+</div>

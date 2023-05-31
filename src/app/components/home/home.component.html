@@ -1,0 +1,21 @@
+<div class="home_wrap">
+    <img src="../../../assets/img/hotel.jpg" alt="">
+    <div class="home_content">
+        <h2 class="text-center text-white">Welcome Back, <br>  Aman Hotels & Resorts</h2>
+                <div class="hm_main_box_wrap">
+                    <div class="row w-100 align-items-center">
+                        <div class="col-md-2">
+                          <div class="time">
+                            <h3>{{ currentTime | date: 'HH:mm' }}</h3>
+                            <p>{{ currentTime | date: 'EEEE' }}</p>
+                            <p>{{ currentTime | date: 'MMMM d, yyyy' }}</p>
+                          </div>
+                        </div>
+                        <div class="col-md-10">
+                            <app-calendar ></app-calendar>
+                         
+                        </div>
+                      </div>
+        </div>
+    </div>
+</div>
