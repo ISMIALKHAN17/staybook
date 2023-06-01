@@ -1,3 +1,4 @@
+<form [formGroup]="hotelForm" (submit)="saveForm()">
 <div class="global_component_wrap">
    <div class="global_component_header h-radius">
     <h4>Setup your Hotel</h4>
@@ -6,40 +7,42 @@
     <div class="col-md-4">
         <div class="g_input_wrap">
             <label>Name</label>
-            <div class="g_input">
-                <input type="text" placeholder="Enter your name"> 
+            <div class="g_input"  [ngClass]="{ 'input_error': submitted && hotelForm.controls.name.errors?.required }">
+                <input type="text" placeholder="Enter your name" formControlName="name" >
             </div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="g_input_wrap">
             <label>Email</label>
-            <div class="g_input">
-                <input type="email" placeholder="Enter your email"> 
+            <div class="g_input"  [ngClass]="{ 'input_error': submitted && hotelForm.controls.email.errors?.required }">
+                <input type="email" placeholder="Enter your email" formControlName="email">
             </div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="g_input_wrap">
             <label>Contact</label>
-            <div class="g_input">
-                <input type="text" placeholder="Enter hotel phone number"> 
+
+              <div class="g_input" [ngClass]="{ 'input_error': submitted && hotelForm.controls.contact.errors?.required }">
+
+                <input type="text" placeholder="Enter hotel phone number" formControlName="contact" >
             </div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="g_input_wrap">
             <label>Rooms</label>
-            <div class="g_input">
-                <input type="number" placeholder="Enter rooms quantity"> 
+            <div class="g_input"  [ngClass]="{ 'input_error': submitted && hotelForm.controls.rooms.errors?.required }">
+                <input type="number" placeholder="Enter rooms quantity" formControlName="rooms">
             </div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="g_input_wrap">
             <label>Address line 1</label>
-            <div class="g_input">
-                <input type="text" placeholder="Stree address"> 
+            <div class="g_input"  [ngClass]="{ 'input_error': submitted && hotelForm.controls.address_line_1.errors?.required }">
+                <input type="text" placeholder="Stree address" formControlName="address_line_1">
             </div>
         </div>
     </div>
@@ -47,39 +50,49 @@
         <div class="g_input_wrap">
             <label>Address line 2</label>
             <div class="g_input">
-                <input type="text" placeholder="Stree address"> 
+                <input type="text" placeholder="Stree address" formControlName="address_line_2">
             </div>
         </div>
     </div>
     <div class="col-md-3">
         <div class="g_input_wrap">
             <label>Country</label>
-            <div class="g_input">
-                <input type="text" placeholder="Pakistan"> 
+            <div class="g_input"  [ngClass]="{ 'input_error': submitted && hotelForm.controls.country_id.errors?.required }">
+                <!-- <input type="text" placeholder="Pakistan"  > -->
+                <select type="text" class="form-control" formControlName="country_id">
+                  <option selected value="2">Pakistan  </option>
+
+                </select>
             </div>
         </div>
     </div>
     <div class="col-md-3">
         <div class="g_input_wrap">
             <label>State</label>
-            <div class="g_input">
-                <input type="text" placeholder="Sindh"> 
+            <div class="g_input"  [ngClass]="{ 'input_error': submitted && hotelForm.controls.state_id.errors?.required }">
+                <select type="text" class="form-control" (change)="cities($event.target)" formControlName="state_id">
+                  <option selected disabled>States   </option>
+                  <option  *ngFor="let list of states_list" [value]="list.id">{{list.name}}</option>
+                </select>
             </div>
         </div>
     </div>
     <div class="col-md-3">
         <div class="g_input_wrap">
             <label>City</label>
-            <div class="g_input">
-                <input type="text" placeholder="Enter city name"> 
+            <div class="g_input"  [ngClass]="{ 'input_error': submitted && hotelForm.controls.city_id.errors?.required }">
+              <select type="text" class="form-control" formControlName="city_id">
+                <option selected disabled>Cities  </option>
+                <option *ngFor="let list of cities_list" [value]="list.id">{{list.name}}</option>
+              </select>
             </div>
         </div>
     </div>
     <div class="col-md-3">
         <div class="g_input_wrap">
             <label>Postal Code</label>
-            <div class="g_input">
-                <input type="text" placeholder="Enter postal code"> 
+            <div class="g_input"  [ngClass]="{ 'input_error': submitted && hotelForm.controls.postalCode.errors?.required }">
+                <input type="text" placeholder="Enter postal code" formControlName="postalCode">
             </div>
         </div>
     </div>
@@ -90,7 +103,7 @@
    <div class="row p-2 add_images_row">
     <div class="col-3" *ngFor="let image of images; let i = index">
       <div class="image-container">
-        <img [src]="image.url" alt="">
+        <img [src]="image.url" alt="" >
         <div class="overlay">
           <div class="remove-icon" (click)="removeImage(i)">
             <i class="fa-solid fa-times"></i>
@@ -101,7 +114,7 @@
     <div class="col-3" *ngIf="images.length < 4">
       <div class="add_image">
         <i class="fa-solid fa-circle-plus"></i>
-        <input type="file" (change)="onFileChange($event)">
+        <input type="file" (change)="onFileChange($event)" multiple>
       </div>
     </div>
   </div>
@@ -109,139 +122,29 @@
     <h4>Popular Amenities</h4>
   </div>
   <div class="row p-3 ">
-    <div class="col-md-3">
+
+
+    <div class="col-md-3" *ngFor="let group of amenity_list">
     <div class="amenities">
-    <h5><i class="fa-solid fa-plane-departure"></i> Airport Shuttle</h5>
-    <div class="checkbox-wrapper-4">
-        <input type="checkbox" id="free" class="inp-cbx">
-        <label for="free" class="cbx"><span>
+    <h5><i class="fa-solid fa-plane-departure"></i> {{group.name}}</h5>
+
+    <div class="checkbox-wrapper-4" *ngFor="let list of group.amenity_list">
+      <input type="checkbox" id="{{list.name}}" [value]="list.id" class="inp-cbx" (change)="onCheckboxChange($event, list.id)">
+        <label for="{{list.name}}" class="cbx"><span>
         <svg height="10px" width="12px">
-          
-        </svg></span><span>Free</span></label>
+
+        </svg></span><span>{{list.name}}</span></label>
       </div>
-      <div class="checkbox-wrapper-4">
-        <input type="checkbox" id="paid" class="inp-cbx">
-        <label for="paid" class="cbx"><span>
-        <svg height="10px" width="12px">
-          
-        </svg></span><span>Paid</span></label>
-      </div>
-      <div class="checkbox-wrapper-4">
-        <input type="checkbox" id="Airport drop off" class="inp-cbx">
-        <label for="Airport drop off" class="cbx"><span>
-        <svg height="10px" width="12px">
-          
-        </svg></span><span>Airport drop off</span></label>
-      </div>
-      <div class="checkbox-wrapper-4">
-        <input type="checkbox" id="Airport pick up" class="inp-cbx">
-        <label for="Airport pick up" class="cbx"><span>
-        <svg height="10px" width="12px">
-          
-        </svg></span><span>Airport pick up</span></label>
-      </div>
-      
+
+
 </div>
     </div>
-    <div class="col-md-3">
-    <div class="amenities">
-    <h5><i class="fa-solid fa-martini-glass"></i> Bar</h5>
-    <div class="checkbox-wrapper-4">
-        <input type="checkbox" id="Huge Bar" class="inp-cbx">
-        <label for="Huge Bar" class="cbx"><span>
-        <svg height="10px" width="12px">
-          
-        </svg></span><span>Huge Bar</span></label>
-      </div>
-      <div class="checkbox-wrapper-4">
-        <input type="checkbox" id="Happy hour" class="inp-cbx">
-        <label for="Happy hour" class="cbx"><span>
-        <svg height="10px" width="12px">
-          
-        </svg></span><span>Happy hour</span></label>
-      </div>
-      <div class="checkbox-wrapper-4">
-        <input type="checkbox" id="Mini Bar" class="inp-cbx">
-        <label for="Mini Bar" class="cbx"><span>
-        <svg height="10px" width="12px">
-          
-        </svg></span><span>Mini Bar</span></label>
-      </div>
-      <div class="checkbox-wrapper-4">
-        <input type="checkbox" id="Pool bar" class="inp-cbx">
-        <label for="Pool bar" class="cbx"><span>
-        <svg height="10px" width="12px">
-          
-        </svg></span><span>Pool bar</span></label>
-      </div>
-      
-</div>
-    </div>
-    <div class="col-md-3">
-    <div class="amenities">
-    <h5><i class="fa-solid fa-wifi"></i>Free Wifi</h5>
-    <div class="checkbox-wrapper-4">
-        <input type="checkbox" id="Free all around" class="inp-cbx">
-        <label for="Free all around" class="cbx"><span>
-        <svg height="10px" width="12px">
-          
-        </svg></span><span>Free all around</span></label>
-      </div>
-      <div class="checkbox-wrapper-4">
-        <input type="checkbox" id="Free in public areas" class="inp-cbx">
-        <label for="Free in public areas" class="cbx"><span>
-        <svg height="10px" width="12px">
-          
-        </svg></span><span>Free in public areas</span></label>
-      </div>
-      <div class="checkbox-wrapper-4">
-        <input type="checkbox" id="Paid in room" class="inp-cbx">
-        <label for="Paid in room" class="cbx"><span>
-        <svg height="10px" width="12px">
-          
-        </svg></span><span>Paid in rooms</span></label>
-      </div>
-      <div class="checkbox-wrapper-4">
-        <input type="checkbox" id="Free in rooms" class="inp-cbx">
-        <label for="Free in rooms" class="cbx"><span>
-        <svg height="10px" width="12px">
-          
-        </svg></span><span>Free in rooms</span></label>
-      </div>
-      
-</div>
-    </div>
-    <div class="col-md-3">
-    <div class="amenities">
-    <h5><i class="fa-solid fa-ban-smoking"></i> Smoking</h5>
-    <div class="checkbox-wrapper-4">
-        <input type="checkbox" id="Smoking gallery’s" class="inp-cbx">
-        <label for="Smoking gallery’s" class="cbx"><span>
-        <svg height="10px" width="12px">
-          
-        </svg></span><span>Smoking gallery’s</span></label>
-      </div>
-      <div class="checkbox-wrapper-4">
-        <input type="checkbox" id="Not allowed" class="inp-cbx">
-        <label for="Not allowed" class="cbx"><span>
-        <svg height="10px" width="12px">
-          
-        </svg></span><span>Not allowed</span></label>
-      </div>
-      <div class="checkbox-wrapper-4">
-        <input type="checkbox" id="Allowed" class="inp-cbx">
-        <label for="Allowed" class="cbx"><span>
-        <svg height="10px" width="12px">
-          
-        </svg></span><span>Allowed</span></label>
-      </div>
-      
-</div>
-    </div>
+
   </div>
 
   <div class="d-flex justify-content-end py-3 px-2">
     <button class="theme_btn">Save</button>
   </div>
-  
+
 </div>
+</form>
