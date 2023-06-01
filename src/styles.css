@@ -18,31 +18,31 @@ body {
     --stroke:#737791;
 
   }
-  
+
   a {
     text-decoration: none;
     color: #000 ;
     white-space: initial;
     cursor: pointer;
   }
-  
+
   a:hover,
   a:focus {
     text-decoration: none;
-   
+
   }
-  
+
   a:hover {
     transition: all 0.5s ease-in-out;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
     color: var(--main-color);
   }
-  
+
   img {
     max-width: 100%;
   }
-  
+
   input[type="text"]:focus,
   textarea:focus,
   input[type="password"]:focus,
@@ -56,7 +56,7 @@ body {
     -moz-transition: all 0.5s ease;
     outline: none;
   }
-  
+
   select,
   input[type="text"],
   input[type="password"],
@@ -69,50 +69,50 @@ body {
     -moz-appearance: none;
     appearance: none;
   }
-  
+
   ul {
     margin: 0 0 20px;
     padding: 0;
     list-style-type: none;
   }
-  
+
   p {
     font-weight: 400;
   }
-  
+
   /***** Font Files *****/
 
   /***** Custom Classes *****/
-  
+
   .noPadding {
     padding: 0;
   }
-  
+
   .noLeft {
     padding-left: 0;
   }
-  
+
   .noRight {
     padding-right: 0;
   }
-  
+
   .centerCol {
     float: none;
     margin: 0 auto;
   }
-  
+
   .pt_8 {
     padding-top: 80px;
   }
-  
+
   .pb_8 {
     padding-bottom: 80px;
   }
-  
+
   .py_8 {
     padding: 80px 0px;
   }
-  
+
   .theme_btn {
     background-color: var(--main-color);
     color: #fff;
@@ -127,22 +127,22 @@ body {
     justify-content: center;
   }
 
- 
+
   .theme_btn:disabled:hover{
     background-color: var(--main-color);
     cursor: not-allowed;
   }
-  
+
   .theme_btn:hover {
     background-color: var(--secondory-color);
     border-color: var(--main-color);
     color: var(--main-color);
   }
-  
+
   .theme_btn:active {
     filter: brightness(0.8);
   }
-  
+
   .flexRow {
     display: -webkit-box;
     display: -moz-box;
@@ -151,7 +151,7 @@ body {
     display: flex;
     align-items: center;
   }
-  
+
   .flexCol {
     -webkit-box-flex: 1;
     -moz-box-flex: 1;
@@ -160,7 +160,7 @@ body {
     flex: 1;
     align-items: center;
   }
-  
+
   h1 {
     font-family: var(--old);
     font-size: 55px;
@@ -169,7 +169,7 @@ body {
     font-weight: 500;
     margin: 0 0 17px;
   }
-  
+
   h2 {
     font-family: var(--old);
     font-size: 55px;
@@ -178,7 +178,7 @@ body {
     font-weight: 500;
     margin: 0 0 30px;
   }
-  
+
   h3 {
     font-family: var(--mons);
     font-size: 30px;
@@ -187,7 +187,7 @@ body {
     font-weight: 600;
     margin: 0 0 28px;
   }
-  
+
   h4 {
     font-family: var(--mons);
     font-size: 24px;
@@ -196,7 +196,7 @@ body {
     font-weight: 500;
     margin: 0 0 13px;
   }
-  
+
   h5 {
     font-family: var(--mons);
     font-size: 20px;
@@ -205,7 +205,7 @@ body {
     font-weight: 500;
     margin: 0 0 20px;
   }
-  
+
   h6 {
     font-family: var(--mons);
     font-size: 18px;
@@ -214,29 +214,29 @@ body {
     font-weight: 500;
     margin: 0 0 22px;
   }
-  
+
   select {
     padding: 0 40px 0 30px;
   }
-  
+
   ::-webkit-input-placeholder {
     color: #575757;
   }
-  
+
   ::-moz-placeholder {
     color: #575757;
     opacity: 1;
   }
-  
+
   :-ms-input-placeholder {
     color: #575757;
   }
-  
+
   :-moz-placeholder {
     color: #575757;
     opacity: 1;
   }
-  
+
 
   /* auth */
   .main_wrap.d-flex.align-items-center {
@@ -319,7 +319,7 @@ body {
 }
 
 .input_error:before ,.input_error:after{
-    background-color: red;
+    background-color: red !important;
 }
 .input_error .input_icon i{
     color: red;
@@ -376,7 +376,7 @@ body {
     box-sizing: border-box;
     animation: shadowRolling 2s linear infinite;
   }
-  
+
   @keyframes shadowRolling {
     0% {
       box-shadow: 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
@@ -406,8 +406,8 @@ body {
       box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0);
     }
   }
-        
-      
+
+
   /* loader  */
 
 
@@ -794,7 +794,7 @@ body {
       transition-duration: 0.25s;
     }
   }
-  
+
 /* sidebar */
 
 
@@ -957,14 +957,14 @@ body {
   width: 3.7em;
   height: 1.8em;
  }
- 
+
  .switch input {
   display: none;
   opacity: 0;
   width: 0;
   height: 0;
  }
- 
+
  .slider {
   position: absolute;
   cursor: pointer;
@@ -976,7 +976,7 @@ body {
   transition: .2s;
   border-radius: 30px;
  }
- 
+
  .slider:before {
   position: absolute;
   content: "";
@@ -988,19 +988,19 @@ body {
   background-color: #fff;
   transition: .4s;
  }
- 
+
  input:checked + .slider::before {
   background-color: #fff;
  }
- 
+
  input:checked + .slider {
   background-color: var(--secondary-container);
  }
- 
+
  input:focus + .slider {
   box-shadow: 0 0 1px var(--secondary-container);
  }
- 
+
  input:checked + .slider:before {
   transform: translateX(1.9em);
  }
@@ -1121,7 +1121,7 @@ ngb-datepicker-navigation-select>.form-select {
 .ngb-dp-weekday.small {
   position: relative
 }
-/* 
+/*
 .ngb-dp-weekday.small:before {
   background: var(--main-color);
   position: absolute;
@@ -1160,7 +1160,7 @@ ngb-datepicker-navigation-select>.form-select {
 } */
 
 
-.ngb-dp-month { 
+.ngb-dp-month {
   width: 100% !important;
 }
 
@@ -1439,6 +1439,7 @@ ngb-datepicker-navigation-select>.form-select {
   padding-bottom: 9px;
 }
 /* hotel setup  */
+<<<<<<< HEAD
 
 
 /* rate plan  */
@@ -1665,3 +1666,5 @@ button.slick-prev.slick-arrow {
   margin-bottom: 4px;
 }
 /* rate plan  */
+=======
+>>>>>>> 6957cde649b9e44f058a1d1972af2db70b2d9dee
