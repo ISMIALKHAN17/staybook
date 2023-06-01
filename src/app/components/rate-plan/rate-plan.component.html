@@ -1,0 +1,296 @@
+<div class="global_component_wrap">
+    <div class="global_component_header h-radius">
+     <h4 class="d-flex justify-content-between">Rate plans <button (click)="open(content)" class="plan-btn">Add plan <i class="fa-solid fa-circle-plus"></i></button></h4>
+    </div>
+    <div class="row p-2">
+        <div class="col-md-2">
+            <div class="rate_plan text-center">
+                <p class="d-flex justify-content-between align-items-center"><span>01, May</span><span>31, July</span></p>
+                <h4>Winter</h4>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <span>Mon to Fri</span>
+                        <h5>5,000 PKR</h5>
+                    </div>
+                    <div>
+                        <span>Sat and Sun</span>
+                        <h5>6,000 PKR</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="rate_plan_rooms_slider">
+                <div class="rate_plan_room">
+                    <img src="../../../assets/img/room-1.jpg" alt="">
+                    <h3>101</h3>
+                </div>
+                <div class="rate_plan_room">
+                    <img src="../../../assets/img/room-2.jpg" alt="">
+                    <h3>102</h3>
+                </div>
+                <div class="rate_plan_room">
+                    <img src="../../../assets/img/room-3.jpg" alt="">
+                    <h3>103</h3>
+                </div>
+                <div class="rate_plan_room">
+                    <img src="../../../assets/img/room-4.jpg" alt="">
+                    <h3>104</h3>
+                </div>
+                <div class="rate_plan_room">
+                    <img src="../../../assets/img/room-5.jpg" alt="">
+                    <h3>105</h3>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="row p-2">
+        <div class="col-md-2">
+            <div class="rate_plan text-center">
+                <p class="d-flex justify-content-between align-items-center"><span>01, May</span><span>31, July</span></p>
+                <h4>Winter</h4>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <span>Mon to Fri</span>
+                        <h5>5,000 PKR</h5>
+                    </div>
+                    <div>
+                        <span>Sat and Sun</span>
+                        <h5>6,000 PKR</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="rate_plan_rooms_slider">
+                <div class="rate_plan_room">
+                    <img src="../../../assets/img/room-1.jpg" alt="">
+                    <h3>101</h3>
+                </div>
+                <div class="rate_plan_room">
+                    <img src="../../../assets/img/room-2.jpg" alt="">
+                    <h3>102</h3>
+                </div>
+                <div class="rate_plan_room">
+                    <img src="../../../assets/img/room-3.jpg" alt="">
+                    <h3>103</h3>
+                </div>
+                <div class="rate_plan_room">
+                    <img src="../../../assets/img/room-4.jpg" alt="">
+                    <h3>104</h3>
+                </div>
+                <div class="rate_plan_room">
+                    <img src="../../../assets/img/room-5.jpg" alt="">
+                    <h3>105</h3>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="row p-2">
+        <div class="col-md-2">
+            <div class="rate_plan text-center">
+                <p class="d-flex justify-content-between align-items-center"><span>01, May</span><span>31, July</span></p>
+                <h4>Winter</h4>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <span>Mon to Fri</span>
+                        <h5>5,000 PKR</h5>
+                    </div>
+                    <div>
+                        <span>Sat and Sun</span>
+                        <h5>6,000 PKR</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="rate_plan_rooms_slider">
+                <div class="rate_plan_room">
+                    <img src="../../../assets/img/room-1.jpg" alt="">
+                    <h3>101</h3>
+                </div>
+                <div class="rate_plan_room">
+                    <img src="../../../assets/img/room-2.jpg" alt="">
+                    <h3>102</h3>
+                </div>
+                <div class="rate_plan_room">
+                    <img src="../../../assets/img/room-3.jpg" alt="">
+                    <h3>103</h3>
+                </div>
+                <div class="rate_plan_room">
+                    <img src="../../../assets/img/room-4.jpg" alt="">
+                    <h3>104</h3>
+                </div>
+                <div class="rate_plan_room">
+                    <img src="../../../assets/img/room-5.jpg" alt="">
+                    <h3>105</h3>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    </div>
+    <ng-template #content let-c="close" let-d="dismiss">
+       <div class=" addPlan_modal ">
+        <div class="global_component_header h-radius">
+            <h4 class="d-flex justify-content-between">Add rate plan <span><i class="fa fa-close" (click)="c('Close click')"></i></span></h4>
+        </div>
+        <div class="addPlan-body">
+       <div class="row p-2">
+        <div class="col-md-6">
+            <div class="g_input_wrap">
+                <label>Room Type</label>
+                <div class="g_input">
+                    <input type="text" placeholder="Rate plan or season name"> 
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="g_input_wrap">
+                <label>Date</label>
+                <div class="g_input">
+                    <input type="text" placeholder="Enter Date"> 
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="g_input_wrap">
+                <label>Week days Price</label>
+                <div class="g_input">
+                    <input type="email" placeholder="Enter week day Price"> 
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="days_list_wrap">
+                <label>Select Days</label>
+                <ul class="m-0 d-flex justify-content-between days_list">
+                    <li>
+                        <label class="cyberpunk-checkbox-label">
+                            <input class="cyberpunk-checkbox" type="checkbox">
+                            Mon    
+                        </label>
+                    </li>
+                    <li>
+                        <label class="cyberpunk-checkbox-label">
+                            <input class="cyberpunk-checkbox" type="checkbox">
+                            Tue    
+                        </label>
+                    </li>
+                    <li>
+                        <label class="cyberpunk-checkbox-label">
+                            <input class="cyberpunk-checkbox" type="checkbox">
+                            Wed    
+                        </label>
+                    </li>
+                    <li>
+                        <label class="cyberpunk-checkbox-label">
+                            <input class="cyberpunk-checkbox" type="checkbox">
+                            Thu    
+                        </label>
+                    </li>
+                    <li>
+                        <label class="cyberpunk-checkbox-label">
+                            <input class="cyberpunk-checkbox" type="checkbox">
+                            Fri    
+                        </label>
+                    </li>
+                    <li>
+                        <label class="cyberpunk-checkbox-label">
+                            <input class="cyberpunk-checkbox" type="checkbox">
+                            Sat    
+                        </label>
+                    </li>
+                    <li>
+                        <label class="cyberpunk-checkbox-label">
+                            <input class="cyberpunk-checkbox" type="checkbox">
+                            Sun    
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="g_input_wrap">
+                <label>Weekends  Price</label>
+                <div class="g_input">
+                    <input type="email" placeholder="Enter weekends Price"> 
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="days_list_wrap">
+                <label>Select Days</label>
+                <ul class="m-0 d-flex justify-content-between days_list">
+                    <li>
+                        <label class="cyberpunk-checkbox-label">
+                            <input class="cyberpunk-checkbox" type="checkbox">
+                            Mon    
+                        </label>
+                    </li>
+                    <li>
+                        <label class="cyberpunk-checkbox-label">
+                            <input class="cyberpunk-checkbox" type="checkbox">
+                            Tue    
+                        </label>
+                    </li>
+                    <li>
+                        <label class="cyberpunk-checkbox-label">
+                            <input class="cyberpunk-checkbox" type="checkbox">
+                            Wed    
+                        </label>
+                    </li>
+                    <li>
+                        <label class="cyberpunk-checkbox-label">
+                            <input class="cyberpunk-checkbox" type="checkbox">
+                            Thu    
+                        </label>
+                    </li>
+                    <li>
+                        <label class="cyberpunk-checkbox-label">
+                            <input class="cyberpunk-checkbox" type="checkbox">
+                            Fri    
+                        </label>
+                    </li>
+                    <li>
+                        <label class="cyberpunk-checkbox-label">
+                            <input class="cyberpunk-checkbox" type="checkbox">
+                            Sat    
+                        </label>
+                    </li>
+                    <li>
+                        <label class="cyberpunk-checkbox-label">
+                            <input class="cyberpunk-checkbox" type="checkbox">
+                            Sun    
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+       </div>
+       <div class="global_component_header">
+        <h4>Rooms</h4>
+       </div>
+       <div class="row p-2">
+        <div class="col-md-3 mb-2" *ngFor="let room of rooms">
+            <div class="rate_plan_room m-0" [ngClass]="{ 'selected': isRoomSelected(room) }" (click)="toggleRoomSelection(room)">
+              <img [src]="room.roomMainImage" alt="">
+              <h3>{{room.roomNumber}}</h3>
+              <div class="selected-icon" *ngIf="isRoomSelected(room)">
+                <i class="fas fa-check-circle"></i>
+              </div>
+            </div>
+          </div>
+          
+          
+       
+       </div>
+       <div class="d-flex justify-content-end ">
+        <button class="theme_btn m-2">Add</button>
+       </div>
+    </div>
+    </div>
+    </ng-template>
+    <!-- <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button> -->

@@ -4,15 +4,19 @@ import { MainComponent } from './components/main/main.component';
 import { HomeComponent } from './components/home/home.component';
 import { HotelSetupComponent } from './components/hotel-setup/hotel-setup.component';
 import { RoomsComponent } from './components/rooms/rooms.component';
+import { RatePlanComponent } from './components/rate-plan/rate-plan.component';
 
 const routes: Routes = [
   {path:'home', component:HomeComponent},
   {path:'hotel-setup', component:HotelSetupComponent},
-  {path:'rooms', component:RoomsComponent}
+  {path:'rooms', component:RoomsComponent},
+  {path:'rate-plans', component:RatePlanComponent},
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule { 
+  
+}

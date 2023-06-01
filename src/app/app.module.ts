@@ -16,6 +16,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { HotelSetupComponent } from './components/hotel-setup/hotel-setup.component';
 import { RoomsComponent } from './components/rooms/rooms.component';
+import { RatePlanComponent } from './components/rate-plan/rate-plan.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +27,7 @@ import { RoomsComponent } from './components/rooms/rooms.component';
     CalendarComponent,
     HotelSetupComponent,
     RoomsComponent,
+    RatePlanComponent,
     
   ],
   imports: [

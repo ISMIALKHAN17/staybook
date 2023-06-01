@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { trigger, transition, style, animate, state, animateChild, query } from '@angular/animations';
 import { interval } from 'rxjs';
 import { AbstractControl, EmailValidator, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastService } from 'src/app/services/toast.service';
-
+import { AES } from 'crypto-js';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -26,7 +26,7 @@ import { ToastService } from 'src/app/services/toast.service';
   ],
 })
 export class LoginComponent {
-
+  @Output() loggedIn: EventEmitter<void> = new EventEmitter<void>();
   screen = 'login';
   trigerScreen: any;
   timer: number = 30;
@@ -67,11 +67,13 @@ export class LoginComponent {
       this.loading = true;
       this.authService.login(username, password).subscribe(
         (res: any) => {
-          console.log(res);
           this.loading = false;
           localStorage.setItem('bearer_token',res.authorisation.token)
-          localStorage.setItem('user',JSON.stringify(res.user))
+          const encryptedUser = this.encryptUserData(res.user);
+          localStorage.setItem('user', encryptedUser);
           this.showSuccess(`Welcome, ${res.user.name}! Login successful.`);
+          this.loggedIn.emit();
+          localStorage.setItem('authantication',this.encryptUserData('approved'))
         },
         (error: any) => {
           this.loading = false;
@@ -251,5 +253,11 @@ export class LoginComponent {
       }
       )
     }
+  }
+
+
+  encryptUserData(user: any): string {
+    const encryptedData = AES.encrypt(JSON.stringify(user), 'encryption-secret-key').toString();
+    return encryptedData;
   }
 }
