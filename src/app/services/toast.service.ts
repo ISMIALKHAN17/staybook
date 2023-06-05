@@ -15,4 +15,5 @@ export class ToastService {
 	clear() {
 		this.toasts.splice(0, this.toasts.length);
 	}
+
 }

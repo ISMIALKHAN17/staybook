@@ -34,7 +34,7 @@
                     </form>
                   </div>
         <div class="auth_footer">
-        </div>  
+        </div>
         </div>
       </ng-container>
       <ng-container *ngIf="screen == 'forgot-password' && showForgotPassword">
@@ -66,7 +66,7 @@
                 </form>
               </div>
             <div class="auth_footer">
-            </div>  
+            </div>
         </div>
       </ng-container>
       <ng-container *ngIf="screen == 'reset-your-password' && showForgotPassword">
@@ -75,7 +75,7 @@
                 Reset your password
             </div>
             <div class="auth_body reset-pass">
-                <p>How do you want to receive the 
+                <p>How do you want to receive the
                     code to reset your password?</p>
                     <form class="form">
                         <ul>
@@ -88,14 +88,14 @@
                             <input id="02" type="radio" name="r" value="2">
                           </li>
                         </ul>
-                      </form>                      
-            </div>   
+                      </form>
+            </div>
             <div class="auth_footer">
                 <div class="d-flex justify-content-between align-items-center">
                     <a (click)="changeScreen('forgot-password')" ><i class="fa-regular fa-arrow-left"></i></a>
-                    <button class="no-border-btn"  (click)="forgotSendMail()"><span *ngIf="loading" class="loader"></span><span *ngIf="!loading">Continue</span></button>
+                    <a class="no-border-btn"  (click)="forgotSendMail()"><span *ngIf="loading" class="loader"></span><span *ngIf="!loading">Continue</span></a>
                 </div>
-            </div>  
+            </div>
         </div>
       </ng-container>
       <ng-container *ngIf="screen == 'email-otp' && showForgotPassword">
@@ -114,7 +114,7 @@
             </div>
             <div class="d-flex align-items-center justify-content-between">
                 <span>
-                  Didn't get email? 
+                  Didn't get email?
                   <a [ngClass]="{ 'disabled-link': resendDisabled }" (click)="resendDisabled ? null : resendEmail()">Resend</a>
                   <span *ngIf="resendDisabled!"> in {{ timer }} Seconds</span>
                 </span>
@@ -128,7 +128,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <a (click)="changeScreen('forgot-password')" ><i class="fa-regular fa-arrow-left"></i></a>
                 </div>
-            </div>  
+            </div>
         </div>
       </ng-container>
       <ng-container *ngIf="screen == 'phone-otp' && showForgotPassword">
@@ -138,7 +138,7 @@
             </div>
             <div class="auth_body">
                 <h3>Confirm your phone number</h3>
-                <p>We have sent an OTP to your registered phone number. Please enter it 
+                <p>We have sent an OTP to your registered phone number. Please enter it
                     below to confirm your registration.</p>
             <div class="input_wrap">
                 <div class="input_icon">
@@ -156,7 +156,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <a (click)="changeScreen('reset-your-password')" ><i class="fa-regular fa-arrow-left"></i></a>
                 </div>
-            </div>  
+            </div>
         </div>
       </ng-container>
       <ng-container *ngIf="screen == 'new-password' && showForgotPassword">
@@ -191,7 +191,7 @@
             <div class="d-flex justify-content-between align-items-center">
               <a (click)="changeScreen('reset-your-password')"><i class="fa-regular fa-arrow-left"></i></a>
             </div>
-          </div>  
+          </div>
         </div>
       </ng-container>
       <ng-container *ngIf="screen == 'Verified' && showForgotPassword">
@@ -207,7 +207,7 @@
             </div>
             </div>
             <div class="auth_footer">
-            </div>  
+            </div>
         </div>
       </ng-container>
 </div>

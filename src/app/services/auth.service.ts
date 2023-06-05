@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
 
-  private baseUrl = 'http://backend.staybook.pk/public/api/';
+  private baseUrl = 'https://backend.staybook.pk/public/api/';
   isAuthenticated(): boolean {
     const token = localStorage.getItem('bearer_token');
     return token !== null && token !== undefined;

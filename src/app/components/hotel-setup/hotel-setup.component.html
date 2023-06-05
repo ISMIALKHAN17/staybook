@@ -70,10 +70,12 @@
         <div class="g_input_wrap">
             <label>State</label>
             <div class="g_input"  [ngClass]="{ 'input_error': submitted && hotelForm.controls.state_id.errors?.required }">
-                <select type="text" class="form-control" (change)="cities($event.target)" formControlName="state_id">
-                  <option selected disabled>States   </option>
-                  <option  *ngFor="let list of states_list" [value]="list.id">{{list.name}}</option>
-                </select>
+              <select type="text" class="form-control" (change)="cities(stateSelect.value)" #stateSelect formControlName="state_id">
+                <option selected disabled>States</option>
+                <option *ngFor="let list of states_list" [value]="list.id">{{list.name}}</option>
+              </select>
+
+
             </div>
         </div>
     </div>
@@ -91,8 +93,8 @@
     <div class="col-md-3">
         <div class="g_input_wrap">
             <label>Postal Code</label>
-            <div class="g_input"  [ngClass]="{ 'input_error': submitted && hotelForm.controls.postalCode.errors?.required }">
-                <input type="text" placeholder="Enter postal code" formControlName="postalCode">
+            <div class="g_input"  [ngClass]="{ 'input_error': submitted && hotelForm.controls.postol_code.errors?.required }">
+                <input type="text" placeholder="Enter postal code" formControlName="postol_code">
             </div>
         </div>
     </div>
@@ -105,7 +107,7 @@
       <div class="image-container">
         <img [src]="image.url" alt="" >
         <div class="overlay">
-          <div class="remove-icon" (click)="removeImage(i)">
+          <div class="remove-icon" (click)="removeImage(i,image)">
             <i class="fa-solid fa-times"></i>
           </div>
         </div>
@@ -128,12 +130,13 @@
     <div class="amenities">
     <h5><i class="fa-solid fa-plane-departure"></i> {{group.name}}</h5>
 
+
     <div class="checkbox-wrapper-4" *ngFor="let list of group.amenity_list">
-      <input type="checkbox" id="{{list.name}}" [value]="list.id" class="inp-cbx" (change)="onCheckboxChange($event, list.id)">
+      <input type="checkbox" id="{{list.name}}"   [checked]="aminites_list.includes(list.id)"  [value]="list.id" class="inp-cbx" (change)="onCheckboxChange($event, list.id)">
         <label for="{{list.name}}" class="cbx"><span>
         <svg height="10px" width="12px">
 
-        </svg></span><span>{{list.name}}</span></label>
+        </svg></span><span>{{list.name}} {{list.id}} </span></label>
       </div>
 
 

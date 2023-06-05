@@ -36,7 +36,7 @@ export class LoginComponent {
   forgotForm:any
   responseData:any
   resendDisabled:any = true
-  otpPassword:any 
+  otpPassword:any
   passwordForm:any
 
   constructor(
@@ -160,7 +160,7 @@ export class LoginComponent {
     if (selectedOption) {
       const value = selectedOption.getAttribute('value');
       if (value === '1') {
-        this.authService.forgotPassword(this.responseData.email).subscribe(
+        this.authService.forgotSendMail(this.responseData.email).subscribe(
           (res:any)=>
           {
           this.changeScreen('email-otp')
@@ -229,7 +229,7 @@ export class LoginComponent {
   passwordMatchValidator(control: AbstractControl) {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
-    
+
     if (password === confirmPassword) {
       return null; // Passwords match
     } else {

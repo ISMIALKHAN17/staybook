@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { RequestService } from '../../services/request.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -6,6 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent {
+  constructor(
+
+    private api: RequestService,
+    private Router:Router
+
+  ) {}
   isSidebarClosed = false;
   isDarkMode = false;
   darkModeText: string = 'Dark mode';
@@ -21,8 +29,15 @@ export class MainComponent {
   toggleDarkMode() {
     this.isDarkMode = !this.isDarkMode;
     this.darkModeText = this.isDarkMode ? 'Light mode' : 'Dark mode';
-    // Add logic to apply dark mode styles or make necessary changes in your application
-    // For example, you can update the body class to apply dark mode styles:
-    // document.body.classList.toggle('dark');
+
+  }
+  logout(){
+
+    this.api.post('logout',true).subscribe((res: any) => {
+      localStorage.clear();
+      this.Router.navigate(['/login']);
+
+    });
+
   }
 }

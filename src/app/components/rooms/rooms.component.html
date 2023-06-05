@@ -1,3 +1,4 @@
+<form [formGroup]="roomForm" (submit)="onSubmit()">
 <div class="global_component_wrap">
     <div class="global_component_header h-radius">
      <h4>Add Room</h4>
@@ -6,48 +7,48 @@
      <div class="col-md-4">
          <div class="g_input_wrap">
              <label>Room Display Name</label>
-             <div class="g_input">
-                 <input type="text" placeholder="Room Display Name"> 
+             <div class="g_input" [ngClass]="{ 'input_error': submitted && roomForm.controls.display_name.errors?.required }">
+                 <input type="text" placeholder="Room Display Name" formControlName="display_name">
              </div>
          </div>
      </div>
      <div class="col-md-4">
          <div class="g_input_wrap">
              <label>Room Type</label>
-             <div class="g_input">
-                 <input type="email" placeholder="Room Type"> 
+             <div class="g_input" [ngClass]="{ 'input_error': submitted && roomForm.controls.type.errors?.required }">
+                 <input type="email" placeholder="Room Type" formControlName="type">
              </div>
          </div>
      </div>
      <div class="col-md-4">
          <div class="g_input_wrap">
              <label>Room size</label>
-             <div class="g_input">
-                 <input type="text" placeholder="Room size"> 
+             <div class="g_input" [ngClass]="{ 'input_error': submitted && roomForm.controls.size.errors?.required }">
+                 <input type="text" placeholder="Room size" formControlName="size">
              </div>
          </div>
      </div>
      <div class="col-md-4">
          <div class="g_input_wrap">
              <label>Single beds</label>
-             <div class="g_input">
-                 <input type="number" placeholder="Single beds quantity"> 
+             <div class="g_input" [ngClass]="{ 'input_error': submitted && roomForm.controls.single_bed.errors?.required }">
+                 <input type="number" placeholder="Single beds quantity" formControlName="single_bed">
              </div>
          </div>
      </div>
      <div class="col-md-4">
          <div class="g_input_wrap">
              <label>Double beds</label>
-             <div class="g_input">
-                 <input type="text" placeholder="Double beds quantity"> 
+             <div class="g_input" [ngClass]="{ 'input_error': submitted && roomForm.controls.double_bed.errors?.required }">
+                 <input type="text" placeholder="Double beds quantity" formControlName="double_bed">
              </div>
          </div>
      </div>
      <div class="col-md-4">
          <div class="g_input_wrap">
              <label>Maximum Sleeps</label>
-             <div class="g_input">
-                 <input type="text" placeholder="Maximum Sleeps"> 
+             <div class="g_input" [ngClass]="{ 'input_error': submitted && roomForm.controls.maximum_sleeps.errors?.required }">
+                 <input type="text" placeholder="Maximum Sleeps" formControlName="maximum_sleeps">
              </div>
          </div>
      </div>
@@ -69,7 +70,7 @@
      <div class="col-3" *ngIf="images.length < 8">
        <div class="add_image">
          <i class="fa-solid fa-circle-plus"></i>
-         <input type="file" (change)="onFileChange($event)">
+         <input type="file" (change)="onFileChange($event)" multiple>
        </div>
      </div>
    </div>
@@ -77,139 +78,29 @@
      <h4>Room Amenities</h4>
    </div>
    <div class="row p-3 ">
-     <div class="col-md-3">
-     <div class="amenities">
-     <h5><i class="fa-solid fa-bath"></i> Bedding & Bath</h5>
-     <div class="checkbox-wrapper-4">
-         <input type="checkbox" id="free" class="inp-cbx">
-         <label for="free" class="cbx"><span>
-         <svg height="10px" width="12px">
-           
-         </svg></span><span>Free</span></label>
-       </div>
-       <div class="checkbox-wrapper-4">
-         <input type="checkbox" id="paid" class="inp-cbx">
-         <label for="paid" class="cbx"><span>
-         <svg height="10px" width="12px">
-           
-         </svg></span><span>Paid</span></label>
-       </div>
-       <div class="checkbox-wrapper-4">
-         <input type="checkbox" id="Airport drop off" class="inp-cbx">
-         <label for="Airport drop off" class="cbx"><span>
-         <svg height="10px" width="12px">
-           
-         </svg></span><span>Airport drop off</span></label>
-       </div>
-       <div class="checkbox-wrapper-4">
-         <input type="checkbox" id="Airport pick up" class="inp-cbx">
-         <label for="Airport pick up" class="cbx"><span>
-         <svg height="10px" width="12px">
-           
-         </svg></span><span>Airport pick up</span></label>
-       </div>
-       
- </div>
-     </div>
-     <div class="col-md-3">
-     <div class="amenities">
-     <h5><i class="fa-solid fa-kitchen-set"></i> Cookery</h5>
-     <div class="checkbox-wrapper-4">
-         <input type="checkbox" id="Huge Bar" class="inp-cbx">
-         <label for="Huge Bar" class="cbx"><span>
-         <svg height="10px" width="12px">
-           
-         </svg></span><span>Huge Bar</span></label>
-       </div>
-       <div class="checkbox-wrapper-4">
-         <input type="checkbox" id="Happy hour" class="inp-cbx">
-         <label for="Happy hour" class="cbx"><span>
-         <svg height="10px" width="12px">
-           
-         </svg></span><span>Happy hour</span></label>
-       </div>
-       <div class="checkbox-wrapper-4">
-         <input type="checkbox" id="Mini Bar" class="inp-cbx">
-         <label for="Mini Bar" class="cbx"><span>
-         <svg height="10px" width="12px">
-           
-         </svg></span><span>Mini Bar</span></label>
-       </div>
-       <div class="checkbox-wrapper-4">
-         <input type="checkbox" id="Pool bar" class="inp-cbx">
-         <label for="Pool bar" class="cbx"><span>
-         <svg height="10px" width="12px">
-           
-         </svg></span><span>Pool bar</span></label>
-       </div>
-       
- </div>
-     </div>
-     <div class="col-md-3">
-     <div class="amenities">
-     <h5><i class="fa-solid fa-tv"></i> Entertainment</h5>
-     <div class="checkbox-wrapper-4">
-         <input type="checkbox" id="Free all around" class="inp-cbx">
-         <label for="Free all around" class="cbx"><span>
-         <svg height="10px" width="12px">
-           
-         </svg></span><span>Free all around</span></label>
-       </div>
-       <div class="checkbox-wrapper-4">
-         <input type="checkbox" id="Free in public areas" class="inp-cbx">
-         <label for="Free in public areas" class="cbx"><span>
-         <svg height="10px" width="12px">
-           
-         </svg></span><span>Free in public areas</span></label>
-       </div>
-       <div class="checkbox-wrapper-4">
-         <input type="checkbox" id="Paid in room" class="inp-cbx">
-         <label for="Paid in room" class="cbx"><span>
-         <svg height="10px" width="12px">
-           
-         </svg></span><span>Paid in rooms</span></label>
-       </div>
-       <div class="checkbox-wrapper-4">
-         <input type="checkbox" id="Free in rooms" class="inp-cbx">
-         <label for="Free in rooms" class="cbx"><span>
-         <svg height="10px" width="12px">
-           
-         </svg></span><span>Free in rooms</span></label>
-       </div>
-       
- </div>
-     </div>
-     <div class="col-md-3">
-     <div class="amenities">
-     <h5><i class="fa-solid fa-tree-city"></i> General</h5>
-     <div class="checkbox-wrapper-4">
-         <input type="checkbox" id="Smoking gallery’s" class="inp-cbx">
-         <label for="Smoking gallery’s" class="cbx"><span>
-         <svg height="10px" width="12px">
-           
-         </svg></span><span>Smoking gallery’s</span></label>
-       </div>
-       <div class="checkbox-wrapper-4">
-         <input type="checkbox" id="Not allowed" class="inp-cbx">
-         <label for="Not allowed" class="cbx"><span>
-         <svg height="10px" width="12px">
-           
-         </svg></span><span>Not allowed</span></label>
-       </div>
-       <div class="checkbox-wrapper-4">
-         <input type="checkbox" id="Allowed" class="inp-cbx">
-         <label for="Allowed" class="cbx"><span>
-         <svg height="10px" width="12px">
-           
-         </svg></span><span>Allowed</span></label>
-       </div>
-       
- </div>
-     </div>
+
+
+      <div class="col-md-3" *ngFor="let group of amenity_list">
+        <div class="amenities">
+        <h5><i class="fa-solid fa-plane-departure"></i> {{group.name}}</h5>
+
+
+        <div class="checkbox-wrapper-4" *ngFor="let list of group.room_amenity">
+          <input type="checkbox" id="{{list.name}}"    [value]="list.id" class="inp-cbx" (change)="onCheckboxChange($event, list.id)" >
+            <label for="{{list.name}}" class="cbx"><span>
+            <svg height="10px" width="12px">
+
+            </svg></span><span>{{list.name}} {{list.id}} </span></label>
+          </div>
+
+          <!-- [checked]="aminites_list.includes(list.id)"  (change)="onCheckboxChange($event, list.id)" -->
+    </div>
+        </div>
    </div>
- 
+
    <div class="d-flex justify-content-end py-3 px-2">
      <button class="theme_btn">Save</button>
    </div>
-   
+
  </div>
+</form>

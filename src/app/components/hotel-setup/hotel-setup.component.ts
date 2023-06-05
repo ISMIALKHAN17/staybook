@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,AbstractControl } from '@angular/forms';
 import {RequestService} from '../../services/request.service'
+import { AES,enc } from 'crypto-js';
+import { ToastService } from 'src/app/services/toast.service';
 interface Image {
   url: string;
+  id: any;
+  type:string
 }
 @Component({
   selector: 'app-hotel-setup',
@@ -17,7 +21,10 @@ export class HotelSetupComponent {
   submitted:boolean = false;
   states_list:any;
   cities_list:any;
-  constructor(private formBuilder: FormBuilder,private api:RequestService) { }
+  user:any;
+  aminites_list :any = [];
+  removeimages:any = [];
+  constructor(private formBuilder: FormBuilder,private api:RequestService, private toastService: ToastService) { }
 
   onFileChange(event: any) {
     for(let i = 0; i< event.target.files.length;i++){
@@ -25,21 +32,34 @@ export class HotelSetupComponent {
     const reader = new FileReader();
 
     reader.onload = (e: any) => {
+      console.log(e);
       const imageUrl = e.target.result;
-      this.images.push({ url: imageUrl });
+      this.images.push({ url: imageUrl ,id:i,type:"temp"});
+
+      console.log( this.images);
     };
 
     reader.readAsDataURL(file);
   }
   }
-  removeImage(index: number) {
+  removeImage(index: number,img:any) {
     this.images.splice(index, 1);
+    if(img.type == 'Per'){
+      this.removeimages.push({"id":img.id});
+    }
+    this.hotelForm.patchValue({removeImage: this.removeimages});
+    console.log(this.removeimages)
   }
   ngOnInit(): void {
+    const  user = localStorage.getItem('user')
+    this.user = this.decryptUserData(user!)
+
     this.aminities();
     this.states();
+    this.get_hotel();
     this.hotelForm = this.formBuilder.group({
       name: ['', Validators.required],
+      id: [''],
       email: ['', [Validators.required, Validators.email]],
       contact: ['', Validators.required],
       rooms: ['', Validators.required],
@@ -48,21 +68,25 @@ export class HotelSetupComponent {
       country_id: ['', Validators.required],
       state_id: ['', Validators.required],
       city_id: ['', Validators.required],
-      postalCode: ['', Validators.required],
+      postol_code: ['', Validators.required],
       hotel_amenities: [''],
       images:[''],
-      user_id:'1'
+      user_id:this.user.id,
+      removeImage:[]
 
     });
 
 }
 
+showSuccess(message:any) {
+  this.toastService.show(message, { classname: 'bg-success text-light', delay: 10000 });
+}
 saveForm() {
   this.submitted = true;
   this.hotelForm.patchValue({images:this.images})
   if (this.hotelForm.valid) {
     this.api.post('property/store',this.hotelForm.value).subscribe((res:any)=>{
-      this.amenity_list = res.data;
+      this.showSuccess(res.message);
    });
   } else {
     console.log('Form is invalid');
@@ -84,8 +108,8 @@ states(){
 });
 }
 cities(id:any){
-  console.log(id.value);
-  this.api.post('city/list',{"state_id":id.value}).subscribe((res:any)=>{
+
+  this.api.post('city/list',{"state_id":id}).subscribe((res:any)=>{
    this.cities_list = res.data;
 });
 }
@@ -119,5 +143,45 @@ get f(): { [key: string]: AbstractControl } {
   return this.hotelForm.controls;
 }
 
+get_hotel(){
+  this.api.post('property/list',{"user_id":this.user.id}).subscribe((res:any)=>{
+      const hotel = res.data;
+
+      var  aminities:any = [];
+
+    hotel.property_amenity.forEach((element:any) => {
+      aminities.push(element.amenity_list_id)
+    });
+
+    hotel.image.forEach((element:any) => {
+      this.images.push({"url": element.image, "id": element.id,type:"Per"})
+    });
+
+
+    this.aminites_list = aminities.map(Number);
+
+
+    this.cities(hotel.state_id)
+    this.hotelForm.patchValue({
+      name: hotel.name,
+      id: hotel.id,
+      email: hotel.email,
+      contact: hotel.contact,
+      rooms: hotel.rooms,
+      address_line_1: hotel.address_line_1,
+      address_line_2: hotel.address_line_2,
+      country_id: hotel.country_id,
+      state_id: hotel.state_id,
+      city_id: hotel.city_id,
+      postol_code: hotel.postol_code,
+    })
+ });
+}
+
+decryptUserData(encryptedData: string): any {
+  const decryptedBytes = AES.decrypt(encryptedData, 'encryption-secret-key');
+  const decryptedData = JSON.parse(decryptedBytes.toString(enc.Utf8));
+  return decryptedData;
+}
 
 }

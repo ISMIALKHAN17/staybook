@@ -9,18 +9,18 @@
           <span class="image">
             <img src="../../../assets/img/fav_icon.png" alt="">
           </span>
-  
+
           <div class="text logo-text">
             <span class="name">Staybook</span>
           </div>
         </div>
-  
+
         <i class='fa-solid fa-chevron-right toggle' (click)="toggleSidebar()"></i>
       </header>
-  
+
       <div class="menu-bar">
         <div class="menu">
-  
+
           <ul class="menu-links">
             <li class="nav-link" routerLinkActive="active">
               <a routerLink="home">
@@ -34,7 +34,7 @@
                 <span class="text nav-text">Dashboard</span>
               </a>
             </li>
-  
+
             <li class="nav-link" routerLinkActive="active">
               <a routerLink="emails">
                 <i class="fa-solid fa-calendar-check icon"></i>
@@ -87,7 +87,7 @@
         </div>
         <div class="bottom-content">
           <li>
-            <a href="#">
+            <a (click)="logout()">
               <i class='bx bx-log-out icon'></i>
               <span class="text nav-text">Sign Out</span>
             </a>
@@ -121,6 +121,5 @@
             </div>
         </div>
             <router-outlet></router-outlet>
-    </section>  
+    </section>
   </div>
-  
