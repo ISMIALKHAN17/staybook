@@ -1,2 +1,2 @@
-<app-login (loggedIn)="isLoggedIn()"></app-login>
+<app-login *ngIf="!isLoggedIn()" (loggedIn)="isLoggedIn()"></app-login>
 <app-main *ngIf="isLoggedIn()"></app-main>

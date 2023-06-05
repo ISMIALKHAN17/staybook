@@ -8,14 +8,12 @@ import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 export class HomeComponent {
   currentTime: Date = new Date();
   selectedDate: NgbDateStruct | any;
-
   constructor( private calendar: NgbCalendar) {
     setInterval(() => {
-      this.currentTime = new Date(); // Update the current time every second
+      this.currentTime = new Date();
     }, 1000);
   }
   onDateSelect(date: NgbDateStruct) {
-    // Handle the selected date
     console.log(date);
   }
 }
