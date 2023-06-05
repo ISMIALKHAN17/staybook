@@ -1,8 +1,26 @@
 <div class="global_component_wrap">
-    <div class="global_component_header h-radius">
-     <h4 class="d-flex justify-content-between">Rate plans <button (click)="open(content)" class="plan-btn">Add plan <i class="fa-solid fa-circle-plus"></i></button></h4>
+
+  <div class="main" *ngFor="let rate of Rateplans">
+  <div class="global_component_header h-radius" >
+    <h4 class="d-flex justify-content-between">{{rate.season_name}}</h4>
+   </div>
+   <div class="row p-2">
+    <div class="col-md-3">
+        <div class="add_room" (click)="open(addRoom,rate.id)">
+            <span>Add Room <i class="fa-solid fa-circle-plus"></i></span>
+        </div>
     </div>
-    <div class="row p-2">
+</div></div>
+
+
+
+
+
+
+    <div class="global_component_header">
+     <h4 class="d-flex justify-content-between">Add Category</h4>
+    </div>
+    <!-- <div class="row p-2">
         <div class="col-md-2">
             <div class="rate_plan text-center">
                 <p class="d-flex justify-content-between align-items-center"><span>01, May</span><span>31, July</span></p>
@@ -42,10 +60,10 @@
                     <h3>105</h3>
                 </div>
             </div>
-            
+
         </div>
-    </div>
-    <div class="row p-2">
+    </div> -->
+    <!-- <div class="row p-2">
         <div class="col-md-2">
             <div class="rate_plan text-center">
                 <p class="d-flex justify-content-between align-items-center"><span>01, May</span><span>31, July</span></p>
@@ -85,10 +103,10 @@
                     <h3>105</h3>
                 </div>
             </div>
-            
+
         </div>
-    </div>
-    <div class="row p-2">
+    </div> -->
+    <!-- <div class="row p-2">
         <div class="col-md-2">
             <div class="rate_plan text-center">
                 <p class="d-flex justify-content-between align-items-center"><span>01, May</span><span>31, July</span></p>
@@ -128,169 +146,335 @@
                     <h3>105</h3>
                 </div>
             </div>
-            
+
         </div>
-    </div>
+    </div> -->
+    <div class="row p-2">
+        <div class="col-md-3">
+            <div class="add_room" (click)="open(content,'id')">
+                <i class="fa-solid fa-circle-plus"></i>
+            </div>
+        </div>
     </div>
     <ng-template #content let-c="close" let-d="dismiss">
        <div class=" addPlan_modal ">
         <div class="global_component_header h-radius">
-            <h4 class="d-flex justify-content-between">Add rate plan <span><i class="fa fa-close" (click)="c('Close click')"></i></span></h4>
+            <h4 class="d-flex justify-content-between">Add Category  <span><i class="fa fa-close" (click)="c('Close click')"></i></span></h4>
         </div>
-        <div class="addPlan-body">
-       <div class="row p-2">
-        <div class="col-md-6">
-            <div class="g_input_wrap">
-                <label>Room Type</label>
-                <div class="g_input">
-                    <input type="text" placeholder="Rate plan or season name"> 
+        <form [formGroup]="rateplane" (submit)="submit()">
+          <div class="addPlan-body">
+            <div class="row p-2">
+             <div class="col-md-6">
+                 <div class="g_input_wrap">
+                     <label>Category  Name </label>
+
+                     <div class="g_input" [ngClass]="{ 'input_error': submitted && rateplane.controls.season_name.errors?.required }">
+                         <input type="text" placeholder="Category  Name " formControlName="season_name">
+                     </div>
+                 </div>
+             </div>
+             <div class="col-md-6">
+                 <div class="g_input_wrap">
+
+                     <form class="row row-cols-sm-auto">
+                         <div class="col-md-6">
+                             <label>From</label>
+                             <div class="dp-hidden position-absolute">
+                                 <div class="input-group">
+                                         <input
+                                         name="datepicker"
+                                         class="form-control"
+                                         ngbDatepicker
+                                         #datepicker="ngbDatepicker"
+                                         [autoClose]="'outside'"
+                                         (dateSelect)="onDateSelection($event)"
+                                         [displayMonths]="2"
+                                         [dayTemplate]="t"
+                                         outsideDays="hidden"
+                                         [startDate]="fromDate!"
+                                         tabindex="-1"
+
+                                         />
+
+                                     <ng-template #t let-date let-focused="focused">
+                                         <span
+                                             class="custom-day"
+                                             [class.focused]="focused"
+                                             [class.range]="isRange(date)"
+                                             [class.faded]="isHovered(date) || isInside(date)"
+                                             (mouseenter)="hoveredDate = date"
+                                             (mouseleave)="hoveredDate = null"
+                                         >
+                                             {{ date.day }}
+                                         </span>
+                                     </ng-template>
+                                 </div>
+                             </div>
+
+                             <div class="input-group" [ngClass]="{ 'input_error': submitted && rateplane.controls.season_name.errors?.required }">
+                                 <input
+                                     #dpFromDate
+                                     class="form-control"
+                                     placeholder="yyyy-mm-dd"
+                                     name="from"
+                                     [value]="formatter.format(fromDate)"
+
+                                     (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
+                                 />
+                                 <button class="btn btn-outline-secondary bi bi-calendar3" (click)="datepicker.toggle()" type="button"><i class="fa-solid fa-calendar-days"></i></button>
+                             </div>
+                         </div>
+                         <div class="col-md-6">
+                             <label>To</label>
+                             <div class="input-group" [ngClass]="{ 'input_error': submitted && rateplane.controls.season_name.errors?.required }">
+                                 <input
+                                     #dpToDate
+                                     class="form-control"
+                                     placeholder="yyyy-mm-dd"
+                                     name="dpToDate"
+                                     [value]="formatter.format(toDate)"
+
+                                     (input)="toDate = validateInput(toDate, dpToDate.value)"
+                                 />
+                                 <button class="btn btn-outline-secondary bi bi-calendar3" (click)="datepicker.toggle()" type="button"><i class="fa-solid fa-calendar-days"></i></button>
+                             </div>
+                         </div>
+                     </form>
+                 </div>
+             </div>
+             <div class="col-md-3">
+                 <div class="g_input_wrap">
+                     <label>Week days Price</label>
+                     <div class="g_input" [ngClass]="{ 'input_error': submitted && rateplane.controls.week_days_price.errors?.required }">
+                         <input type="email" placeholder="Enter week day Price" formControlName="week_days_price">
+                     </div>
+                 </div>
+             </div>
+             <div class="col-md-9">
+                 <div class="days_list_wrap">
+                     <label>Select Days</label>
+                     <ul class="m-0 d-flex justify-content-between days_list">
+                         <li>
+                             <label class="cyberpunk-checkbox-label">
+                                 <input class="cyberpunk-checkbox" type="checkbox"  (change)="updateweek_days('mon')" >
+                                 Mon
+                             </label>
+                         </li>
+                         <li>
+                             <label class="cyberpunk-checkbox-label">
+                                 <input class="cyberpunk-checkbox" type="checkbox" (change)="updateweek_days('Tue')">
+                                 Tue
+                             </label>
+                         </li>
+                         <li>
+                             <label class="cyberpunk-checkbox-label">
+                                 <input class="cyberpunk-checkbox" type="checkbox" (change)="updateweek_days('Wed')">
+                                 Wed
+                             </label>
+                         </li>
+                         <li>
+                             <label class="cyberpunk-checkbox-label">
+                                 <input class="cyberpunk-checkbox" type="checkbox" (change)="updateweek_days('Thu')">
+                                 Thu
+                             </label>
+                         </li>
+                         <li>
+                             <label class="cyberpunk-checkbox-label">
+                                 <input class="cyberpunk-checkbox" type="checkbox" (change)="updateweek_days('Fri')">
+                                 Fri
+                             </label>
+                         </li>
+                         <li>
+                             <label class="cyberpunk-checkbox-label">
+                                 <input class="cyberpunk-checkbox" type="checkbox" (change)="updateweek_days('Sat')">
+                                 Sat
+                             </label>
+                         </li>
+                         <li>
+                             <label class="cyberpunk-checkbox-label">
+                                 <input class="cyberpunk-checkbox" type="checkbox" (change)="updateweek_days('Sun')">
+                                 Sun
+                             </label>
+                         </li>
+                     </ul>
+                 </div>
+             </div>
+             <div class="col-md-3">
+                 <div class="g_input_wrap">
+                     <label>Weekends  Price</label>
+                     <div class="g_input" [ngClass]="{ 'input_error': submitted && rateplane.controls.weekends_price.errors?.required }">
+                         <input type="email" placeholder="Enter weekends Price" formControlName="weekends_price" >
+                     </div>
+                 </div>
+             </div>
+             <div class="col-md-9">
+                 <div class="days_list_wrap">
+                     <label>Select Days</label>
+                     <ul class="m-0 d-flex justify-content-between days_list">
+                         <li>
+                             <label class="cyberpunk-checkbox-label">
+                                 <input class="cyberpunk-checkbox" type="checkbox" (change)="updateweekends_price('Mon')">
+                                 Mon
+                             </label>
+                         </li>
+                         <li>
+                             <label class="cyberpunk-checkbox-label">
+                                 <input class="cyberpunk-checkbox" type="checkbox" (change)="updateweekends_price('Tue')">
+                                 Tue
+                             </label>
+                         </li>
+                         <li>
+                             <label class="cyberpunk-checkbox-label">
+                                 <input class="cyberpunk-checkbox" type="checkbox" (change)="updateweekends_price('Wed')">
+                                 Wed
+                             </label>
+                         </li>
+                         <li>
+                             <label class="cyberpunk-checkbox-label">
+                                 <input class="cyberpunk-checkbox" type="checkbox" (change)="updateweekends_price('Thu')">
+                                 Thu
+                             </label>
+                         </li>
+                         <li>
+                             <label class="cyberpunk-checkbox-label">
+                                 <input class="cyberpunk-checkbox" type="checkbox" (change)="updateweekends_price('Fri')">
+                                 Fri
+                             </label>
+                         </li>
+                         <li>
+                             <label class="cyberpunk-checkbox-label">
+                                 <input class="cyberpunk-checkbox" type="checkbox" (change)="updateweekends_price('Sat')">
+                                 Sat
+                             </label>
+                         </li>
+                         <li>
+                             <label class="cyberpunk-checkbox-label">
+                                 <input class="cyberpunk-checkbox" type="checkbox" (change)="updateweekends_price('Sun')">
+                                 Sun
+                             </label>
+                         </li>
+                     </ul>
+                 </div>
+             </div>
+            </div>
+            <div class="d-flex justify-content-end ">
+             <button class="theme_btn m-2">Add</button>
+            </div>
+         </div>
+        </form>
+
+
+    </div>
+    </ng-template>
+    <ng-template #addRoom let-c="close" let-d="dismiss">
+       <div class=" addPlan_modal ">
+        <div class="global_component_header h-radius">
+            <h4 class="d-flex justify-content-between align-items-center">Add Room <span><i class="fa fa-close" (click)="c('Close click')"></i></span></h4>
+           </div>
+           <div class="addPlan-body">
+       <form  [formGroup]="roomForm" (submit)="onSubmit()">
+        <div class="row p-2">
+          <div class="col-md-4">
+              <div class="g_input_wrap">
+                  <label>Room Display Name</label>
+                  <div class="g_input" [ngClass]="{ 'input_error': submitted && roomForm.controls.display_name.errors?.required }">
+                      <input type="text" placeholder="Room Display Name" formControlName="display_name">
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="g_input_wrap">
+                  <label>Room Type</label>
+                  <div class="g_input" [ngClass]="{ 'input_error': submitted && roomForm.controls.type.errors?.required }">
+                      <input type="email" placeholder="Room Type" formControlName="type">
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="g_input_wrap">
+                  <label>Room size</label>
+                  <div class="g_input" [ngClass]="{ 'input_error': submitted && roomForm.controls.size.errors?.required }">
+                      <input type="text" placeholder="Room size" formControlName="size">
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="g_input_wrap">
+                  <label>Single beds</label>
+                  <div class="g_input" [ngClass]="{ 'input_error': submitted && roomForm.controls.single_bed.errors?.required }">
+                      <input type="number" placeholder="Single beds quantity" formControlName="single_bed">
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="g_input_wrap">
+                  <label>Double beds</label>
+                  <div class="g_input" [ngClass]="{ 'input_error': submitted && roomForm.controls.double_bed.errors?.required }">
+                      <input type="text" placeholder="Double beds quantity" formControlName="double_bed">
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="g_input_wrap">
+                  <label>Maximum Sleeps</label>
+                  <div class="g_input" [ngClass]="{ 'input_error': submitted && roomForm.controls.maximum_sleeps.errors?.required }">
+                      <input type="text" placeholder="Maximum Sleeps" formControlName="maximum_sleeps">
+                  </div>
+              </div>
+          </div>
+         </div>
+         <div class="global_component_header">
+          <h4>Room images</h4>
+         </div>
+         <div class="row p-2 add_images_row">
+          <div class="col-3 mb-2" *ngFor="let image of images; let i = index">
+            <div class="image-container">
+              <img [src]="image.url" alt="">
+              <div class="overlay">
+                <div class="remove-icon" (click)="removeImage(i)">
+                  <i class="fa-solid fa-times"></i>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="g_input_wrap">
-                <label>Date</label>
-                <div class="g_input">
-                    <input type="text" placeholder="Enter Date"> 
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="g_input_wrap">
-                <label>Week days Price</label>
-                <div class="g_input">
-                    <input type="email" placeholder="Enter week day Price"> 
-                </div>
-            </div>
-        </div>
-        <div class="col-md-9">
-            <div class="days_list_wrap">
-                <label>Select Days</label>
-                <ul class="m-0 d-flex justify-content-between days_list">
-                    <li>
-                        <label class="cyberpunk-checkbox-label">
-                            <input class="cyberpunk-checkbox" type="checkbox">
-                            Mon    
-                        </label>
-                    </li>
-                    <li>
-                        <label class="cyberpunk-checkbox-label">
-                            <input class="cyberpunk-checkbox" type="checkbox">
-                            Tue    
-                        </label>
-                    </li>
-                    <li>
-                        <label class="cyberpunk-checkbox-label">
-                            <input class="cyberpunk-checkbox" type="checkbox">
-                            Wed    
-                        </label>
-                    </li>
-                    <li>
-                        <label class="cyberpunk-checkbox-label">
-                            <input class="cyberpunk-checkbox" type="checkbox">
-                            Thu    
-                        </label>
-                    </li>
-                    <li>
-                        <label class="cyberpunk-checkbox-label">
-                            <input class="cyberpunk-checkbox" type="checkbox">
-                            Fri    
-                        </label>
-                    </li>
-                    <li>
-                        <label class="cyberpunk-checkbox-label">
-                            <input class="cyberpunk-checkbox" type="checkbox">
-                            Sat    
-                        </label>
-                    </li>
-                    <li>
-                        <label class="cyberpunk-checkbox-label">
-                            <input class="cyberpunk-checkbox" type="checkbox">
-                            Sun    
-                        </label>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="g_input_wrap">
-                <label>Weekends  Price</label>
-                <div class="g_input">
-                    <input type="email" placeholder="Enter weekends Price"> 
-                </div>
-            </div>
-        </div>
-        <div class="col-md-9">
-            <div class="days_list_wrap">
-                <label>Select Days</label>
-                <ul class="m-0 d-flex justify-content-between days_list">
-                    <li>
-                        <label class="cyberpunk-checkbox-label">
-                            <input class="cyberpunk-checkbox" type="checkbox">
-                            Mon    
-                        </label>
-                    </li>
-                    <li>
-                        <label class="cyberpunk-checkbox-label">
-                            <input class="cyberpunk-checkbox" type="checkbox">
-                            Tue    
-                        </label>
-                    </li>
-                    <li>
-                        <label class="cyberpunk-checkbox-label">
-                            <input class="cyberpunk-checkbox" type="checkbox">
-                            Wed    
-                        </label>
-                    </li>
-                    <li>
-                        <label class="cyberpunk-checkbox-label">
-                            <input class="cyberpunk-checkbox" type="checkbox">
-                            Thu    
-                        </label>
-                    </li>
-                    <li>
-                        <label class="cyberpunk-checkbox-label">
-                            <input class="cyberpunk-checkbox" type="checkbox">
-                            Fri    
-                        </label>
-                    </li>
-                    <li>
-                        <label class="cyberpunk-checkbox-label">
-                            <input class="cyberpunk-checkbox" type="checkbox">
-                            Sat    
-                        </label>
-                    </li>
-                    <li>
-                        <label class="cyberpunk-checkbox-label">
-                            <input class="cyberpunk-checkbox" type="checkbox">
-                            Sun    
-                        </label>
-                    </li>
-                </ul>
-            </div>
-        </div>
-       </div>
-       <div class="global_component_header">
-        <h4>Rooms</h4>
-       </div>
-       <div class="row p-2">
-        <div class="col-md-3 mb-2" *ngFor="let room of rooms">
-            <div class="rate_plan_room m-0" [ngClass]="{ 'selected': isRoomSelected(room) }" (click)="toggleRoomSelection(room)">
-              <img [src]="room.roomMainImage" alt="">
-              <h3>{{room.roomNumber}}</h3>
-              <div class="selected-icon" *ngIf="isRoomSelected(room)">
-                <i class="fas fa-check-circle"></i>
               </div>
             </div>
           </div>
-          
-          
-       
-       </div>
-       <div class="d-flex justify-content-end ">
-        <button class="theme_btn m-2">Add</button>
-       </div>
-    </div>
+          <div class="col-3" *ngIf="images.length < 8">
+            <div class="add_image">
+              <i class="fa-solid fa-circle-plus"></i>
+              <input type="file" (change)="onFileChange($event)" multiple>
+            </div>
+          </div>
+        </div>
+        <div class="global_component_header">
+          <h4>Room Amenities</h4>
+        </div>
+        <div class="row p-3 ">
+
+
+           <div class="col-md-3" *ngFor="let group of amenity_list">
+             <div class="amenities">
+             <h5><i class="fa-solid fa-plane-departure"></i> {{group.name}}</h5>
+
+
+             <div class="checkbox-wrapper-4" *ngFor="let list of group.room_amenity">
+               <input type="checkbox" id="{{list.name}}"    [value]="list.id" class="inp-cbx" (change)="onCheckboxChange($event, list.id)" >
+                 <label for="{{list.name}}" class="cbx"><span>
+                 <svg height="10px" width="12px">
+
+                 </svg></span><span>{{list.name}} {{list.id}} </span></label>
+               </div>
+
+               <!-- [checked]="aminites_list.includes(list.id)"  (change)="onCheckboxChange($event, list.id)" -->
+         </div>
+             </div>
+        </div>
+
+        <div class="d-flex justify-content-end py-3 px-2">
+          <button class="theme_btn">Save</button>
+        </div>
+       </form>
+        </div>
     </div>
     </ng-template>
+
+
     <!-- <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button> -->

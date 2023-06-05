@@ -5,12 +5,16 @@ import { HomeComponent } from './components/home/home.component';
 import { HotelSetupComponent } from './components/hotel-setup/hotel-setup.component';
 import { RoomsComponent } from './components/rooms/rooms.component';
 import { RatePlanComponent } from './components/rate-plan/rate-plan.component';
+import { BookingsComponent } from './components/bookings/bookings.component';
+import { ReportsComponent } from './components/reports/reports.component';
 
 const routes: Routes = [
   {path:'home', component:HomeComponent},
   {path:'hotel-setup', component:HotelSetupComponent},
   {path:'rooms', component:RoomsComponent},
   {path:'rate-plans', component:RatePlanComponent},
+  {path:'bookings', component:BookingsComponent},
+  {path:'reports', component:ReportsComponent},
 ];
 
 @NgModule({

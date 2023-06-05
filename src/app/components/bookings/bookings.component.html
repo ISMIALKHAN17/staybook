@@ -1,0 +1,224 @@
+<div class="global_component_wrap">
+    <div class="global_component_header h-radius d-flex justify-content-between align-items-center">
+        <h4>Arrivals</h4>
+       <ul class="booking-filter d-flex align-items-center m-0 gap-3">
+            <li>
+                <select class="form-select">
+                    <option selected disabled>Sort by</option>
+                    <option value="confirmed">Confirmed</option>
+                    <option value="modified">Modified</option>
+                    <option value="paid">Paid</option>
+                    <option value="unpaid">Unpaid</option>
+                </select>
+            </li>
+            <li class="position-relative">
+                <div class="dp-hidden position-absolute">
+                    <div class="input-group">
+                            <input
+                            name="datepicker"
+                            class="form-control d-none opacity-0 position-absolute "
+                            ngbDatepicker
+                            #datepicker="ngbDatepicker"
+                            [autoClose]="'outside'"
+                            (dateSelect)="onDateSelection($event)"
+                            [displayMonths]="2"
+                            [dayTemplate]="t"
+                            outsideDays="hidden"
+                            [startDate]="fromDate!"
+                            tabindex="-1"
+                            />
+                        <ng-template #t let-date let-focused="focused">
+                            <span
+                                class="custom-day"
+                                [class.focused]="focused"
+                                [class.range]="isRange(date)"
+                                [class.faded]="isHovered(date) || isInside(date)"
+                                (mouseenter)="hoveredDate = date"
+                                (mouseleave)="hoveredDate = null"
+                            >
+                                {{ date.day }}
+                            </span>
+                        </ng-template>
+                    </div>
+                </div>
+                <button (click)="datepicker.toggle()"><i class="fa-regular fa-calendar-days"></i> 
+                    Date
+                </button>
+            </li>
+            <li>
+                <button><i class="fa-solid fa-cloud-arrow-down"></i></button>
+            </li>
+       </ul>
+    </div>
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Channel</th>
+            <th>Guest</th>
+            <th>LOS</th>
+            <th>Check in</th>
+            <th>Check out</th>
+            <th>Date Booked</th>
+            <th>Payment</th>
+            <th>Reservation Status</th>
+            <th>Room Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"><img src="../../../assets/img/logo.png" alt=""></th>
+            <td>Ahmed Ali</td>
+            <td>2 Nights</td>
+            <td><i class="fa-solid fa-person-walking-arrow-right"></i> 26 Jan</td>
+            <td><i class="fa-solid fa-person-walking-arrow-loop-left"></i> 28 Jan</td>
+            <td>28 Jan  4:52</td>
+            <td><span class="paid-booking">Paid</span></td>
+            <td><span class="modified-booking">Modified</span></td>
+            <td><span>Single</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Walk in</th>
+            <td>Subhan Tariq</td>
+            <td>1 Night</td>
+            <td><i class="fa-solid fa-person-walking-arrow-right"></i> 26 Jan</td>
+            <td><i class="fa-solid fa-person-walking-arrow-loop-left"></i> 28 Jan</td>
+            <td>28 Jan  4:52</td>
+            <td><span class="paid-booking">paid</span></td>
+            <td><span class="confirmed-booking">Confirmed</span></td>
+            <td><span class="paid-boking">Single</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Walk in</th>
+            <td>Subhan Tariq</td>
+            <td>1 Night</td>
+            <td><i class="fa-solid fa-person-walking-arrow-right"></i> 26 Jan</td>
+            <td><i class="fa-solid fa-person-walking-arrow-loop-left"></i> 28 Jan</td>
+            <td>28 Jan  4:52</td>
+            <td><span class="paid-booking">paid</span></td>
+            <td><span class="confirmed-booking">Confirmed</span></td>
+            <td><span class="paid-boking">Doubles</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Walk in</th>
+            <td>Subhan Tariq</td>
+            <td>1 Night</td>
+            <td><i class="fa-solid fa-person-walking-arrow-right"></i> 26 Jan</td>
+            <td><i class="fa-solid fa-person-walking-arrow-loop-left"></i> 28 Jan</td>
+            <td>28 Jan  4:52</td>
+            <td><span class="paid-booking">paid</span></td>
+            <td><span class="confirmed-booking">Confirmed</span></td>
+            <td><span class="paid-boking">Single</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Walk in</th>
+            <td>Subhan Tariq</td>
+            <td>1 Night</td>
+            <td><i class="fa-solid fa-person-walking-arrow-right"></i> 26 Jan</td>
+            <td><i class="fa-solid fa-person-walking-arrow-loop-left"></i> 28 Jan</td>
+            <td>28 Jan  4:52</td>
+            <td><span class="paid-booking">paid</span></td>
+            <td><span class="confirmed-booking">Confirmed</span></td>
+            <td><span class="paid-boking">Doubles</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Walk in</th>
+            <td>Subhan Tariq</td>
+            <td>1 Night</td>
+            <td><i class="fa-solid fa-person-walking-arrow-right"></i> 26 Jan</td>
+            <td><i class="fa-solid fa-person-walking-arrow-loop-left"></i> 28 Jan</td>
+            <td>28 Jan  4:52</td>
+            <td><span class="paid-booking">paid</span></td>
+            <td><span class="confirmed-booking">Confirmed</span></td>
+            <td><span class="paid-boking">Single</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Walk in</th>
+            <td>Subhan Tariq</td>
+            <td>1 Night</td>
+            <td><i class="fa-solid fa-person-walking-arrow-right"></i> 26 Jan</td>
+            <td><i class="fa-solid fa-person-walking-arrow-loop-left"></i> 28 Jan</td>
+            <td>28 Jan  4:52</td>
+            <td><span class="paid-booking">paid</span></td>
+            <td><span class="confirmed-booking">Confirmed</span></td>
+            <td><span class="paid-boking">Single</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Walk in</th>
+            <td>Subhan Tariq</td>
+            <td>1 Night</td>
+            <td><i class="fa-solid fa-person-walking-arrow-right"></i> 26 Jan</td>
+            <td><i class="fa-solid fa-person-walking-arrow-loop-left"></i> 28 Jan</td>
+            <td>28 Jan  4:52</td>
+            <td><span class="paid-booking">paid</span></td>
+            <td><span class="confirmed-booking">Confirmed</span></td>
+            <td><span class="paid-boking">Single</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Walk in</th>
+            <td>Subhan Tariq</td>
+            <td>1 Night</td>
+            <td><i class="fa-solid fa-person-walking-arrow-right"></i> 26 Jan</td>
+            <td><i class="fa-solid fa-person-walking-arrow-loop-left"></i> 28 Jan</td>
+            <td>28 Jan  4:52</td>
+            <td><span class="paid-booking">paid</span></td>
+            <td><span class="confirmed-booking">Confirmed</span></td>
+            <td><span class="paid-boking">Single</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Walk in</th>
+            <td>Subhan Tariq</td>
+            <td>1 Night</td>
+            <td><i class="fa-solid fa-person-walking-arrow-right"></i> 26 Jan</td>
+            <td><i class="fa-solid fa-person-walking-arrow-loop-left"></i> 28 Jan</td>
+            <td>28 Jan  4:52</td>
+            <td><span class="paid-booking">paid</span></td>
+            <td><span class="confirmed-booking">Confirmed</span></td>
+            <td><span class="paid-boking">Single</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Walk in</th>
+            <td>Subhan Tariq</td>
+            <td>1 Night</td>
+            <td><i class="fa-solid fa-person-walking-arrow-right"></i> 26 Jan</td>
+            <td><i class="fa-solid fa-person-walking-arrow-loop-left"></i> 28 Jan</td>
+            <td>28 Jan  4:52</td>
+            <td><span class="paid-booking">paid</span></td>
+            <td><span class="confirmed-booking">Confirmed</span></td>
+            <td><span class="paid-boking">Single</span></td>
+          </tr>
+          <tr>
+            <th scope="row"><img src="../../../assets/img/logo.png" alt=""></th>
+            <td>Subhan Tariq</td>
+            <td>1 Night</td>
+            <td><i class="fa-solid fa-person-walking-arrow-right"></i> 26 Jan</td>
+            <td><i class="fa-solid fa-person-walking-arrow-loop-left"></i> 28 Jan</td>
+            <td>28 Jan  4:52</td>
+            <td><span class="unpaid-booking">Unpaid</span></td>
+            <td><span class="confirmed-booking">Confirmed</span></td>
+            <td><span class="paid-boking">Single</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Walk in</th>
+            <td>Subhan Tariq</td>
+            <td>1 Night</td>
+            <td><i class="fa-solid fa-person-walking-arrow-right"></i> 26 Jan</td>
+            <td><i class="fa-solid fa-person-walking-arrow-loop-left"></i> 28 Jan</td>
+            <td>28 Jan  4:52</td>
+            <td><span class="paid-booking">paid</span></td>
+            <td><span class="confirmed-booking">Confirmed</span></td>
+            <td><span class="paid-boking">Single</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Walk in</th>
+            <td>Subhan Tariq</td>
+            <td>1 Night</td>
+            <td><i class="fa-solid fa-person-walking-arrow-right"></i> 26 Jan</td>
+            <td><i class="fa-solid fa-person-walking-arrow-loop-left"></i> 28 Jan</td>
+            <td>28 Jan  4:52</td>
+            <td><span class="paid-booking">paid</span></td>
+            <td><span class="confirmed-booking">Confirmed</span></td>
+            <td><span class="paid-boking">Single</span></td>
+          </tr>
+        </tbody>
+      </table>
+</div>
