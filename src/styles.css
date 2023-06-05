@@ -1006,7 +1006,7 @@ body {
  }
 /* switch */
 
-
+/* 
 .ngb-dp-header {
   padding: 8px 0
 }
@@ -1120,7 +1120,7 @@ ngb-datepicker-navigation-select>.form-select {
 
 .ngb-dp-weekday.small {
   position: relative
-}
+} */
 /*
 .ngb-dp-weekday.small:before {
   background: var(--main-color);
@@ -1159,14 +1159,14 @@ ngb-datepicker-navigation-select>.form-select {
   content: "Sunday"
 } */
 
-
+/* 
 .ngb-dp-month {
   width: 100% !important;
 }
 
 .ngb-dp-week {
   justify-content: space-between !important;
-}
+} */
 
 
 
@@ -1439,7 +1439,7 @@ ngb-datepicker-navigation-select>.form-select {
   padding-bottom: 9px;
 }
 /* hotel setup  */
-<<<<<<< HEAD
+
 
 
 /* rate plan  */
@@ -1666,5 +1666,4 @@ button.slick-prev.slick-arrow {
   margin-bottom: 4px;
 }
 /* rate plan  */
-=======
->>>>>>> 6957cde649b9e44f058a1d1972af2db70b2d9dee
+

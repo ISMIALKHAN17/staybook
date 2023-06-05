@@ -8,4 +8,59 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  
+  .selected-icon.ng-star-inserted {
+    position: absolute;
+    z-index: 11;
+    color: #fff;
+    background: #000000b5;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+}
+
+.dp-hidden {
+  width: 0;
+  margin: 0;
+  border: none;
+  padding: 0;
+}
+.custom-day {
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
+}
+.custom-day.focused {
+  background-color: #e6e6e6;
+}
+.custom-day.range,
+.custom-day:hover {
+  background-color: rgb(2, 117, 216);
+  color: white;
+}
+.custom-day.faded {
+  background-color: rgba(2, 117, 216, 0.5);
+}
+
+
+.add_room {
+  height: 200px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--main-color);
+  border-radius: 10px;
+  font-size: 50px;
+  color: #ffff;
+  cursor: pointer;
+}
+
+
+.addPlan_modal .global_component_header span{
+  cursor: pointer;
+} 
