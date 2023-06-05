@@ -58,16 +58,32 @@ isRoomSelected(room: any) {
 
   open(modal:any){
     this.modalService.open(modal ,{centered:true})
+    $('.roomMainImage').slick({
+      asNavFor: '.roomImages',
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      prevArrow: '<button type="button" class="slick-prev"><i class="fa-solid fa-chevron-left"></i></button>',
+      nextArrow: '<button type="button" class="slick-next"><i class="fa-solid fa-chevron-right"></i></button>'
+    });
+    $('.roomImages').slick({
+      asNavFor: '.roomMainImage',
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      prevArrow: '<button type="button" class="slick-prev"><i class="fa-solid fa-chevron-left"></i></button>',
+      nextArrow: '<button type="button" class="slick-next"><i class="fa-solid fa-chevron-right"></i></button>'
+    });
   }
 
   ngAfterViewInit() {
-    $('.rate_plan_rooms_slider').slick({
+    $('.roomMainImage').slick({
     slidesToShow: 4,
     slidesToScroll: 1,
     centerMode:true,
     prevArrow: '<button type="button" class="slick-prev"><i class="fa-solid fa-chevron-left"></i></button>',
     nextArrow: '<button type="button" class="slick-next"><i class="fa-solid fa-chevron-right"></i></button>'
     });
+
+    
   }
 
 

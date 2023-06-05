@@ -4,6 +4,17 @@
        </div>
        <div class="row p-2">
         <div class="col-md-3">
+            <div class="rate_plan_room">
+                <ul>
+                    <li><i class="fa-regular fa-pen-to-square" (click)="open(addRoom)"></i></li>
+                    <li><i class="fa-solid fa-eye" ngbTooltip="View" (click)="open(roomDetails)"></i></li>
+                    <li><i class="fa-solid fa-trash-can" ngbTooltip="Delete"></i></li>
+                </ul>
+                <img src="../../../assets/img/room-2.jpg" alt="">
+                <h3>102</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
             <div class="add_room" (click)="open(addRoom)">
                 <span>Add Room <i class="fa-solid fa-circle-plus"></i></span>
             </div>
@@ -567,6 +578,32 @@
         </div>
     </div>
     </ng-template>
+    <ng-template #roomDetails let-c="close" let-d="dismiss">
+       <div class=" addPlan_modal ">
+           <div class="addPlan-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="roomMainImage">
+                        <div><img src="../../../assets/img/room-1.jpg" alt=""></div>
+                        <div><img src="../../../assets/img/room-2.jpg" alt=""></div>
+                        <div><img src="../../../assets/img/room-3.jpg" alt=""></div>
+                        <div><img src="../../../assets/img/room-4.jpg" alt=""></div>
+                        <div><img src="../../../assets/img/room-5.jpg" alt=""></div>
+                       
+                      </div>
+                      <div class="roomImages">
+                        <div><img src="../../../assets/img/room-1.jpg" alt=""></div>
+                        <div><img src="../../../assets/img/room-2.jpg" alt=""></div>
+                        <div><img src="../../../assets/img/room-3.jpg" alt=""></div>
+                        <div><img src="../../../assets/img/room-4.jpg" alt=""></div>
+                        <div><img src="../../../assets/img/room-5.jpg" alt=""></div>
+                      </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+    </ng-template>
+
 
     
     <!-- <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button> -->

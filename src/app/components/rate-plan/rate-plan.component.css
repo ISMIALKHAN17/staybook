@@ -75,3 +75,36 @@
 .addPlan_modal .global_component_header span{
   cursor: pointer;
 } 
+
+.rate_plan_room ul {
+  position: absolute;
+  z-index: 11;
+  display: flex;
+  color: #fff;
+  font-size: 17px;
+  gap: 11px;
+  top: 7px;
+  right: 7px;
+  transform: translateX(90px);
+  transition: 0.3s;
+}
+
+.rate_plan_room:hover ul {
+  transform: translate(0px, 0px);
+}
+
+.rate_plan_room ul li {
+  cursor: pointer;
+}
+.roomMainImage img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.roomImages img {
+  width: 100%;
+  height: 110px;
+  border-radius: 5px;
+  object-fit: cover;
+}
