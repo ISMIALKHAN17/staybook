@@ -878,16 +878,88 @@ body {
 }
 
 
+app-calendar.home-calendar .ngb-dp-month {
+  width: 100%;
+}
+
+
+
+.home-calendar .ngb-dp-week {
+  justify-content: space-between;
+  height: 57px;
+  font-size: 18px;
+  color: #fff;
+}
+
+.home-calendar .ngb-dp-weekdays {
+  background-color: transparent;
+  border: none;
+  height: 74px !important;
+  display: flex;
+  align-items: center;
+}
+
+app-calendar.home-calendar .calendar_wrap {
+  position: relative;
+}
+
+
+
+app-calendar.home-calendar .calendar_wrap:before {
+  content: '';
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(7px);
+  z-index: -1;
+}
+
+.home-calendar .ngb-dp-weekday {
+  color: #fff;
+}
+
 .home_content {
   position: relative;
   z-index: 111;
   padding: 20px;
 }
 
+.home-calendar .ngb-dp-header {
+  background-color: transparent;
+  padding: 30px;
+}
+
+.home-calendar .ngb-dp-header select {
+  background-color: transparent;
+  color: #fff;
+  margin: 10px;
+  height: 43px;
+  font-size: 19px;
+}
+
+.home-calendar .ngb-dp-header select option {
+  background: #26547e;
+}
+
+.home-calendar .ngb-dp-arrow-btn {
+  background: #fff;
+  padding: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--main-color);
+}
+
+.home-calendar .ngb-dp-arrow-btn:hover {
+  background-color: var(--main-color);
+  color: #fff;
+}
+
 
 /* home  */
 .hm_box_wrap {
-  background: #fff;
   text-align: center;
   border-radius: 5px;
   height: 200px;
@@ -899,7 +971,7 @@ body {
 
 .hm_box_wrap h3 {
   margin: 0;
-  color: var(--main-color);
+  color:#fff;
   margin-bottom: 20px;
   font-size: 44px;
 
@@ -911,7 +983,6 @@ body {
 }
 
 .hm_main_box_wrap{
-  background-color: #fff;
   padding: 20px;
   border-radius: 5px;
   display: flex;
@@ -927,7 +998,7 @@ body {
   content: '';
   height: 100%;
   width: 5px;
-  background: var(--main-color);
+  background: #fff;
   position: absolute;
   right: 0;
   top: 0;
@@ -935,13 +1006,14 @@ body {
 }
 
 .time h3 {
-  color: var(--main-color);
+  color: #fff;
   font-size: 80px;
   margin-bottom: 0;
 }
 
 .time p {
   font-size: 25px;
+  color: #fff;
 }
 
 /* home  */

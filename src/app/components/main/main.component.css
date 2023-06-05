@@ -8,6 +8,12 @@ li.nav-link.active a i , li.nav-link.active a span {
     color: #fff;
 }
 
-
+.header_side .theme_btn {
+    height: 50px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
 
 
