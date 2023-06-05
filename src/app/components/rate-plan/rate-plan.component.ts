@@ -23,7 +23,7 @@ export class RatePlanComponent {
   weekends_price: string[] = [];
   user:any;
   submitted:boolean = false;
-
+  roomDetail:any;
   Rateplans:any;
   selectedAmenities:any = [];
   rateplane_id:any;
@@ -114,40 +114,39 @@ isRoomSelected(room: any) {
 
 
 
-  open(modal:any,id:any){
+  open(modal:any,rate:any,room:any = false){
     this.modalService.open(modal ,{centered:true})
-    $('.roomMainImage').slick({
-      asNavFor: '.roomImages',
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      prevArrow: '<button type="button" class="slick-prev"><i class="fa-solid fa-chevron-left"></i></button>',
-      nextArrow: '<button type="button" class="slick-next"><i class="fa-solid fa-chevron-right"></i></button>'
-    });
-    $('.roomImages').slick({
-      asNavFor: '.roomMainImage',
-      slidesToShow: 4,
-      slidesToScroll: 1,
-      prevArrow: '<button type="button" class="slick-prev"><i class="fa-solid fa-chevron-left"></i></button>',
-      nextArrow: '<button type="button" class="slick-next"><i class="fa-solid fa-chevron-right"></i></button>'
-    });
+    this.roomDetail = room
+    setTimeout(() => {
+      $('.roomMainImage').slick({
+        asNavFor: '.roomImages',
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        prevArrow: '<button type="button" class="slick-prev"><i class="fa-solid fa-chevron-left"></i></button>',
+        nextArrow: '<button type="button" class="slick-next"><i class="fa-solid fa-chevron-right"></i></button>'
+      });
+      $('.roomImages').slick({
+        asNavFor: '.roomMainImage',
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        prevArrow: '<button type="button" class="slick-prev"><i class="fa-solid fa-chevron-left"></i></button>',
+        nextArrow: '<button type="button" class="slick-next"><i class="fa-solid fa-chevron-right"></i></button>'
+      });
+    }, 10);
+
+
+    console.log(this.roomDetail.image[0]['room_image']);
 
     this.roomForm.patchValue({
-      rate_plan_id:id
+      rate_plan_id:rate.id
       })
       //
-      this.rateplane_id = id;
+      this.rateplane_id = rate.id;
       console.log(this.rateplane_id)
       this.aminities();
   }
 
   ngAfterViewInit() {
-    $('.roomMainImage').slick({
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    centerMode:true,
-    prevArrow: '<button type="button" class="slick-prev"><i class="fa-solid fa-chevron-left"></i></button>',
-    nextArrow: '<button type="button" class="slick-next"><i class="fa-solid fa-chevron-right"></i></button>'
-    });
 
 
   }

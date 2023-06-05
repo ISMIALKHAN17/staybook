@@ -9,8 +9,8 @@
         <div class="col-md-3" *ngFor="let room of rate.room">
             <div class="rate_plan_room">
                 <ul>
-                    <li><i class="fa-regular fa-pen-to-square" (click)="open(addRoom,rate.id)"></i></li>
-                    <li><i class="fa-solid fa-eye" ngbTooltip="View" (click)="open(roomDetails,rate.id)"></i></li>
+                    <li><i class="fa-regular fa-pen-to-square" (click)="open(addRoom,rate)"></i></li>
+                    <li><i class="fa-solid fa-eye" ngbTooltip="View" (click)="open(roomDetails,rate,room)"></i></li>
                     <li><i class="fa-solid fa-trash-can" ngbTooltip="Delete"></i></li>
                 </ul>
                 <img src="https://backend.staybook.pk/public/images/{{room.image[0].room_image}}" alt="">
@@ -490,24 +490,39 @@
     </ng-template>
     <ng-template #roomDetails let-c="close" let-d="dismiss">
        <div class=" addPlan_modal ">
-           <div class="addPlan-body">
+           <div class="addPlan-body roomDetails">
+            <i class="fa fa-close" (click)="c('Close click')"></i>
             <div class="row">
+                <div class="col-md-6" *ngIf="roomDetail.image">
+                  <div class="roomMainImage">
+                    <div *ngFor="let item of roomDetail.image"><img src="https://backend.staybook.pk/public/images/{{item.room_image}}" alt=""></div>
+                  </div>
+                  <div class="roomImages">
+                    <div *ngFor="let item of roomDetail.image"><img src="https://backend.staybook.pk/public/images/{{item.room_image}}" alt=""></div>
+                      </div>
+                </div>
                 <div class="col-md-6">
-                    <div class="roomMainImage">
-                        <div><img src="../../../assets/img/room-1.jpg" alt=""></div>
-                        <div><img src="../../../assets/img/room-2.jpg" alt=""></div>
-                        <div><img src="../../../assets/img/room-3.jpg" alt=""></div>
-                        <div><img src="../../../assets/img/room-4.jpg" alt=""></div>
-                        <div><img src="../../../assets/img/room-5.jpg" alt=""></div>
-
-                      </div>
-                      <div class="roomImages">
-                        <div><img src="../../../assets/img/room-1.jpg" alt=""></div>
-                        <div><img src="../../../assets/img/room-2.jpg" alt=""></div>
-                        <div><img src="../../../assets/img/room-3.jpg" alt=""></div>
-                        <div><img src="../../../assets/img/room-4.jpg" alt=""></div>
-                        <div><img src="../../../assets/img/room-5.jpg" alt=""></div>
-                      </div>
+                    <h3>Room {{roomDetail?.display_name}} <span>{{roomDetail?.type}}</span></h3>
+                    <ul>
+                        <li><img src="../../../assets/img/icons/single-bed (3).png" alt=""> Single beds <span>({{roomDetail?.single_bed}})</span></li>
+                        <li><img src="../../../assets/img/icons/sleep.png" alt=""> Max Sleeps <span>({{roomDetail?.maximum_sleep}})</span></li>
+                        <li><img src="../../../assets/img/icons/bed.png" alt=""> Double beds <span>({{roomDetail?.double_bed}})</span></li>
+                        <li><img src="../../../assets/img/icons/house.png" alt=""> Room Size <span>{{roomDetail?.size}} sq ft</span></li>
+                    </ul>
+                    <h4>Room Amenities</h4>
+                    <ul class="room-amenities">
+                        <li><i class="fa-solid fa-check"></i> Air conditioning</li>
+                        <li><i class="fa-solid fa-check"></i> Tile/marble floor</li>
+                        <li><i class="fa-solid fa-check"></i> Fan</li>
+                        <li><i class="fa-solid fa-check"></i> Sofa</li>
+                        <li><i class="fa-solid fa-check"></i> Seating Area</li>
+                        <li><i class="fa-solid fa-check"></i> Dining area</li>
+                        <li><i class="fa-solid fa-check"></i> TV</li>
+                        <li><i class="fa-solid fa-check"></i> Telephone</li>
+                        <li><i class="fa-solid fa-check"></i> Flat-screen TV</li>
+                        <li><i class="fa-solid fa-check"></i> Balcony</li>
+                        <li><i class="fa-solid fa-check"></i> Outdoor furniture</li>
+                    </ul>
                 </div>
             </div>
         </div>
