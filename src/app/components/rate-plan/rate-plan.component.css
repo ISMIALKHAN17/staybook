@@ -55,9 +55,20 @@
   justify-content: center;
   background: var(--main-color);
   border-radius: 10px;
-  font-size: 50px;
+
   color: #ffff;
   cursor: pointer;
+}
+.add_room span {
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.add_room i {
+  font-size: 40px;
 }
 
 
