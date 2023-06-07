@@ -454,7 +454,7 @@
             <div class="image-container">
               <img [src]="image.url" alt="">
               <div class="overlay">
-                <div class="remove-icon" (click)="removeImage(i)">
+                <div class="remove-icon" (click)="removeImage(i,image.id)">
                   <i class="fa-solid fa-times"></i>
                 </div>
               </div>
@@ -539,6 +539,6 @@
     </div>
     </ng-template>
 
-
+    <app-toasts-container></app-toasts-container>
 
     <!-- <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button> -->

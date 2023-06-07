@@ -34,6 +34,7 @@ export class RatePlanComponent {
   selectedAmenities:any = [];
   rateplane_id:any;
   aminites_list:any = [];
+  removeImages:any = [];
 //   rooms=[
 //     {
 //     roomId:1,
@@ -95,7 +96,8 @@ ngOnInit(): void {
     images: ['', Validators.required],
     room_amenities: ['', Validators.required],
     property_id: [this.user.property_id, Validators.required],
-    rate_plan_id: ['', Validators.required]
+    rate_plan_id: ['', Validators.required],
+    removeImage:['']
   });
 
   const user = localStorage.getItem('user');
@@ -138,13 +140,12 @@ isRoomSelected(room: any) {
     }
     else{
 
-      alert('i am here');
       this.roomDetail = room
 
       this.aminities();
       let img:any =[] ;
       room.image.forEach((element:any) => {
-        img.push({url:`https://backend.staybook.pk/public/images/${element.room_image}`,id:room.id,type:'Per'})
+        img.push({url:`https://backend.staybook.pk/public/images/${element.room_image}`,id:element.id,type:'Per'})
       });
       let ami:any = []
       room.amenities.forEach((element:any) => {
@@ -328,8 +329,10 @@ onFileChange(event: any) {
   }
 }
 
-removeImage(index: number) {
+removeImage(index: number,id:any) {
+  this.removeImages.push({id:id})
   this.images.splice(index, 1);
+console.log(this.removeImages);
 }
 showSuccess(message:any) {
   this.toastService.show(message, { classname: 'bg-success text-light', delay: 10000 });
@@ -361,10 +364,11 @@ get f(): { [key: string]: AbstractControl } {
 
 onSubmit() {
   this.submitted = true;
-  this.roomForm.patchValue({ images: this.images });
+  this.roomForm.patchValue({ images: this.images , removeImage:this.removeImages});
+
   if (this.roomForm.valid) {
-console.log(this.roomForm.value);
-    this.api.post('room/add', this.roomForm.value).subscribe((res: any) => {
+
+    this.api.post('room/add',this.roomForm.value).subscribe((res: any) => {
 
    this.showSuccess(res.message);
    this.rateplans();
@@ -457,4 +461,5 @@ room_delete(room:any){
     }
   });
 }
+
 }
