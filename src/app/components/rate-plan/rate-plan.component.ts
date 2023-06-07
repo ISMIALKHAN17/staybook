@@ -5,10 +5,16 @@ import { NgbDate, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import {RequestService} from '../../services/request.service'
 import { AES, enc } from 'crypto-js';
 import * as $ from 'jquery'
+
 import 'slick-carousel';
 import { ToastService } from 'src/app/services/toast.service';
+import Swal from 'sweetalert2';
+import { NgZone } from '@angular/core';
+
 interface Image {
   url: string;
+  type:string;
+  id:number;
 }
 @Component({
   selector: 'app-rate-plan',
@@ -27,31 +33,32 @@ export class RatePlanComponent {
   Rateplans:any;
   selectedAmenities:any = [];
   rateplane_id:any;
-  rooms=[
-    {
-    roomId:1,
-    roomNumber:101,
-    roomMainImage:'../../../assets/img/room-1.jpg'
-    },
-    {
-    roomId:2,
-    roomNumber:102,
-    roomMainImage:'../../../assets/img/room-2.jpg'
-    },
-    {
-    roomId:3,
-    roomNumber:103,
-    roomMainImage:'../../../assets/img/room-3.jpg'
-    },
-    {
-    roomId:4,
-    roomNumber:104,
-    roomMainImage:'../../../assets/img/room-4.jpg'
-    },
+  aminites_list:any = [];
+//   rooms=[
+//     {
+//     roomId:1,
+//     roomNumber:101,
+//     roomMainImage:'../../../assets/img/room-1.jpg'
+//     },
+//     {
+//     roomId:2,
+//     roomNumber:102,
+//     roomMainImage:'../../../assets/img/room-2.jpg'
+//     },
+//     {
+//     roomId:3,
+//     roomNumber:103,
+//     roomMainImage:'../../../assets/img/room-3.jpg'
+//     },
+//     {
+//     roomId:4,
+//     roomNumber:104,
+//     roomMainImage:'../../../assets/img/room-4.jpg'
+//     },
 
-]
+// ]
 
-constructor(private calendar: NgbCalendar,  private toastService: ToastService, private formBuilder: FormBuilder,public formatter: NgbDateParserFormatter , private modalService: NgbModal,private api:RequestService) {
+constructor(private calendar: NgbCalendar,  private toastService: ToastService, private formBuilder: FormBuilder,public formatter: NgbDateParserFormatter , private modalService: NgbModal,private api:RequestService,private zone: NgZone) {
   this.fromDate = calendar.getToday();
   this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
   const user = localStorage.getItem('user');
@@ -78,6 +85,7 @@ ngOnInit(): void {
   });
 
   this.roomForm = this.formBuilder.group({
+    id:[''],
     display_name: ['', Validators.required],
     type: ['', Validators.required],
     size: ['', Validators.required],
@@ -116,7 +124,56 @@ isRoomSelected(room: any) {
 
   open(modal:any,rate:any,room:any = false){
     this.modalService.open(modal ,{centered:true})
-    this.roomDetail = room
+
+    if(room == false){
+      this.roomDetail = room
+      console.log(this.roomDetail)
+      this.roomForm.patchValue({
+        rate_plan_id:rate
+        })
+        this.rateplane_id = rate;
+
+      this.aminities();
+
+    }
+    else{
+
+      alert('i am here');
+      this.roomDetail = room
+
+      this.aminities();
+      let img:any =[] ;
+      room.image.forEach((element:any) => {
+        img.push({url:`https://backend.staybook.pk/public/images/${element.room_image}`,id:room.id,type:'Per'})
+      });
+      let ami:any = []
+      room.amenities.forEach((element:any) => {
+        this.aminites_list.push(element.amenity_list.id)
+      });
+      room.amenities.forEach((element:any) => {
+        ami.push({aminitiy_id:element.amenity_list.id})
+      });
+
+
+
+
+      this.images = img;
+      this.roomForm.patchValue({
+        id:room.id,
+        display_name: room.display_name,
+        type:  room.type,
+        size: room.size,
+        single_bed:  room.single_bed,
+        double_bed:  room.double_bed,
+        maximum_sleeps: room.maximum_sleep,
+
+        room_amenities:ami,
+        property_id: room.property_setup_id,
+        rate_plan_id: room.rate_plan_id
+      });
+
+    }
+
     setTimeout(() => {
       $('.roomMainImage').slick({
         asNavFor: '.roomImages',
@@ -135,15 +192,10 @@ isRoomSelected(room: any) {
     }, 10);
 
 
-    console.log(this.roomDetail.image[0]['room_image']);
 
-    this.roomForm.patchValue({
-      rate_plan_id:rate.id
-      })
-      //
-      this.rateplane_id = rate.id;
-      console.log(this.rateplane_id)
-      this.aminities();
+
+
+
   }
 
   ngAfterViewInit() {
@@ -208,7 +260,9 @@ isRoomSelected(room: any) {
 
 
     this.api.post('rate_plan/add', this.rateplane.value).subscribe((res: any) => {
-      console.log(res)
+      this.showSuccess(res.message);
+      this.modalService.dismissAll();
+      this.rateplans();
     });
 
     console.log(this.rateplane.value);
@@ -268,7 +322,7 @@ onFileChange(event: any) {
     const reader = new FileReader();
     reader.onload = (e: any) => {
       const imageUrl = e.target.result;
-      this.images.push({ url: imageUrl });
+      this.images.push({ url: imageUrl,id:i,type:'temp' });
     };
     reader.readAsDataURL(file);
   }
@@ -309,17 +363,98 @@ onSubmit() {
   this.submitted = true;
   this.roomForm.patchValue({ images: this.images });
   if (this.roomForm.valid) {
-    console.log(this.roomForm.value);
+console.log(this.roomForm.value);
     this.api.post('room/add', this.roomForm.value).subscribe((res: any) => {
-   console.log(res.data);
+
    this.showSuccess(res.message);
+   this.rateplans();
+   this.modalService.dismissAll();
     });
   } else {
  console.log(this.roomForm.value)
- console.log(this.user)
+
   }
 }
+delete_rateplan(){
+  let counter = 5;
+  const swalInstance:any = Swal.fire({
+    title: 'Are you sure?',
+    text: 'Are you sure you want to delete the category? This action will permanently remove all associated rooms.',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: `Yes, delete it! (${counter})`,
+    cancelButtonText: 'Cancel',
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    allowEnterKey: false
+  });
+  swalInstance.d
+  const timerInterval = setInterval(() => {
+    counter--;
+    if (counter === 0) {
+      clearInterval(timerInterval);
+      swalInstance.enableButtons();
+    }
+    swalInstance.update({
+      confirmButtonText: `Yes, delete it! (${counter})`
+    });
+  }, 1000);
 
+  swalInstance.then((result:any) => {
+    if (result.isConfirmed) {
+      // Perform delete action here
+      Swal.fire({
+        title: 'Deleted!',
+        text: 'The category has been deleted.',
+        icon: 'success'
+      });
+    } else {
+      clearInterval(timerInterval); // Clear the interval if the user cancels
+    }
+  });
+}
+room_delete(room:any){
+  let counter = 5;
+  const swalInstance:any = Swal.fire({
+    title: 'Are you sure?',
+    text: `Are you sure you want to delete  ${room.display_name} Room ?  `,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: `Yes, delete it! (${counter})`,
+    cancelButtonText: 'Cancel',
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    allowEnterKey: false
+  });
+  swalInstance.d
+  const timerInterval = setInterval(() => {
+    counter--;
+    if (counter === 0) {
+      clearInterval(timerInterval);
+      swalInstance.enableButtons();
+    }
+    swalInstance.update({
+      confirmButtonText: `Yes, delete it! (${counter})`
+    });
+  }, 1000);
 
-
+  swalInstance.then((result:any) => {
+    if (result.isConfirmed) {
+      this.api.get('room/delete/'+room.id).subscribe((res: any) => {
+      Swal.fire({
+        title: 'Deleted!',
+        text: `The Room ${room.display_name}  has been deleted.`,
+        icon: 'success'
+      });
+      this.rateplans()
+    });
+    } else {
+      clearInterval(timerInterval); // Clear the interval if the user cancels
+    }
+  });
+}
 }

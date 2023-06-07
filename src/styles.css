@@ -1284,7 +1284,7 @@ ngb-datepicker-navigation-select>.form-select {
   overflow: hidden;
 }
 
-.g_input_wrap .g_input input {
+.g_input_wrap .g_input input ,.g_input_wrap .g_input select {
   border: none;
   height: 100%;
   width: 100%;

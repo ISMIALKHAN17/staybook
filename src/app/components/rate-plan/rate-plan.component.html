@@ -3,17 +3,17 @@
 
 
   <div class="global_component_header h-radius">
-        <h4 class="d-flex justify-content-between">{{rate.season_name}}</h4>
+        <h4 class="d-flex justify-content-between">{{rate.season_name}} <i class="fa-solid fa-trash-can"  style="font-size: 16px;" (click)="delete_rateplan()" ngbTooltip="Delete"></i></h4>
        </div>
        <div class="row p-2">
-        <div class="col-md-3" *ngFor="let room of rate.room">
+        <div class="col-md-3 mb-3" *ngFor="let room of rate.room">
             <div class="rate_plan_room">
                 <ul>
-                    <li><i class="fa-regular fa-pen-to-square" (click)="open(addRoom,rate)"></i></li>
+                    <li><i class="fa-regular fa-pen-to-square" ngbTooltip="Edit" (click)="open(addRoom,rate,room)"></i></li>
                     <li><i class="fa-solid fa-eye" ngbTooltip="View" (click)="open(roomDetails,rate,room)"></i></li>
-                    <li><i class="fa-solid fa-trash-can" ngbTooltip="Delete"></i></li>
+                    <li><i class="fa-solid fa-trash-can" ngbTooltip="Delete" (click)="room_delete(room)"></i></li>
                 </ul>
-                <img src="https://backend.staybook.pk/public/images/{{room.image[0].room_image}}" alt="">
+                <img src="https://backend.staybook.pk/public/images/{{room.image[0].room_image}}" alt="" onerror="this.src='https://sharespaces.no/wp-content/themes/gecko/assets/images/placeholder.png'">
                 <h3>{{room.display_name}}</h3>
             </div>
         </div>
@@ -31,7 +31,7 @@
 
 
     <div class="global_component_header">
-     <h4 class="d-flex justify-content-between">Add Category</h4>
+     <h4 class="d-flex gap-2 align-items-center" style="cursor: pointer;" (click)="open(content,'id')">Add Category <i class="fa-solid fa-circle-plus"></i></h4>
     </div>
     <!-- <div class="row p-2">
         <div class="col-md-2">
@@ -162,13 +162,13 @@
 
         </div>
     </div> -->
-    <div class="row p-2">
+    <!-- <div class="row p-2">
         <div class="col-md-3">
             <div class="add_room" (click)="open(content,'id')">
                 <i class="fa-solid fa-circle-plus"></i>
             </div>
         </div>
-    </div>
+    </div> -->
     <ng-template #content let-c="close" let-d="dismiss">
        <div class=" addPlan_modal ">
         <div class="global_component_header h-radius">
@@ -411,7 +411,7 @@
                   </div>
               </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
               <div class="g_input_wrap">
                   <label>Single beds</label>
                   <div class="g_input" [ngClass]="{ 'input_error': submitted && roomForm.controls.single_bed.errors?.required }">
@@ -419,7 +419,7 @@
                   </div>
               </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
               <div class="g_input_wrap">
                   <label>Double beds</label>
                   <div class="g_input" [ngClass]="{ 'input_error': submitted && roomForm.controls.double_bed.errors?.required }">
@@ -427,11 +427,21 @@
                   </div>
               </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
               <div class="g_input_wrap">
                   <label>Maximum Sleeps</label>
                   <div class="g_input" [ngClass]="{ 'input_error': submitted && roomForm.controls.maximum_sleeps.errors?.required }">
                       <input type="text" placeholder="Maximum Sleeps" formControlName="maximum_sleeps">
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-3">
+              <div class="g_input_wrap">
+                  <label>Category</label>
+                  <div class="g_input" [ngClass]="{ 'input_error': submitted && roomForm.controls.maximum_sleeps.errors?.required }">
+                      <select name="" id="">
+                        <option [value]="ratePlan.id" [selected]="ratePlan.id == roomDetail.rate_plan_id " *ngFor="let ratePlan of Rateplans">{{ratePlan.season_name}}</option>
+                      </select>
                   </div>
               </div>
           </div>
@@ -469,13 +479,13 @@
 
 
              <div class="checkbox-wrapper-4" *ngFor="let list of group.room_amenity">
-               <input type="checkbox" id="{{list.name}}"    [value]="list.id" class="inp-cbx" (change)="onCheckboxChange($event, list.id)" >
+               <input type="checkbox" id="{{list.name}}"    [value]="list.id" [checked]="aminites_list.includes(list.id)"   class="inp-cbx" (change)="onCheckboxChange($event, list.id)" >
                  <label for="{{list.name}}" class="cbx"><span>
                  <svg height="10px" width="12px">
 
                  </svg></span><span>{{list.name}} {{list.id}} </span></label>
                </div>
-
+               <!--  -->
                <!-- [checked]="aminites_list.includes(list.id)"  (change)="onCheckboxChange($event, list.id)" -->
          </div>
              </div>
