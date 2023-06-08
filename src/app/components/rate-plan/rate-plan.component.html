@@ -439,7 +439,7 @@
               <div class="g_input_wrap">
                   <label>Category</label>
                   <div class="g_input" [ngClass]="{ 'input_error': submitted && roomForm.controls.maximum_sleeps.errors?.required }">
-                      <select name="" id="">
+                      <select name="" id="" formControlName="rate_plan_id">
                         <option [value]="ratePlan.id" [selected]="ratePlan.id == roomDetail.rate_plan_id " *ngFor="let ratePlan of Rateplans">{{ratePlan.season_name}}</option>
                       </select>
                   </div>

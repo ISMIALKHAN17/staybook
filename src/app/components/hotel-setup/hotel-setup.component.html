@@ -1,5 +1,8 @@
 <form [formGroup]="hotelForm" (submit)="saveForm()">
 <div class="global_component_wrap">
+  <div class="componentLoaderWrap" *ngIf="loading">
+    <span class="componentLoader"></span>
+  </div>
    <div class="global_component_header h-radius">
     <h4>Setup your Hotel</h4>
    </div>
@@ -103,7 +106,7 @@
     <h4>Images</h4>
    </div>
    <div class="row p-2 add_images_row">
-    <div class="col-3" *ngFor="let image of images; let i = index">
+    <div class="col-3 mb-2" *ngFor="let image of images; let i = index">
       <div class="image-container">
         <img [src]="image.url" alt="" >
         <div class="overlay">
@@ -146,8 +149,9 @@
   </div>
 
   <div class="d-flex justify-content-end py-3 px-2">
-    <button class="theme_btn">Save</button>
+    <button class="theme_btn" [disabled]="btnLoading"><span class="loader" *ngIf="btnLoading"></span>  <span *ngIf="!btnLoading">Save</span></button>
   </div>
 
 </div>
 </form>
+<app-toasts-container></app-toasts-container>

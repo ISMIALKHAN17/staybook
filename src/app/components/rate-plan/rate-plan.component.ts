@@ -142,6 +142,7 @@ isRoomSelected(room: any) {
 
       this.roomDetail = room
 
+
       this.aminities();
       let img:any =[] ;
       room.image.forEach((element:any) => {
@@ -150,6 +151,7 @@ isRoomSelected(room: any) {
       let ami:any = []
       room.amenities.forEach((element:any) => {
         this.aminites_list.push(element.amenity_list.id)
+        this.selectedAmenities.push({aminitiy_id:element.amenity_list.id})
       });
       room.amenities.forEach((element:any) => {
         ami.push({aminitiy_id:element.amenity_list.id})
@@ -170,7 +172,7 @@ isRoomSelected(room: any) {
 
         room_amenities:ami,
         property_id: room.property_setup_id,
-        rate_plan_id: room.rate_plan_id
+        rate_plan_id:   rate.id
       });
 
     }
@@ -306,6 +308,7 @@ isRoomSelected(room: any) {
 rateplans(){
   this.api.post('rate_plan/list', {"property_id":this.user.property_id}).subscribe((res: any) => {
     this.Rateplans = res.data.data;
+    this.modalService.dismissAll();
   });
 
 
@@ -347,9 +350,11 @@ onCheckboxChange(event: any, list: any) {
   if (event.target.checked) {
     this.selectedAmenities.push({ aminitiy_id: list });
   } else {
+
     const index = this.selectedAmenities.findIndex((item: any) => item.aminitiy_id === list);
     if (index !== -1) {
       this.selectedAmenities.splice(index, 1);
+
     }
   }
   const roomAmenities = {
@@ -372,7 +377,7 @@ onSubmit() {
 
    this.showSuccess(res.message);
    this.rateplans();
-   this.modalService.dismissAll();
+
     });
   } else {
  console.log(this.roomForm.value)
