@@ -24,6 +24,8 @@ export class HotelSetupComponent {
   user:any;
   aminites_list :any = [];
   removeimages:any = [];
+  loading:any = false
+  btnLoading:any = false
   constructor(private formBuilder: FormBuilder,private api:RequestService, private toastService: ToastService) { }
 
   onFileChange(event: any) {
@@ -53,6 +55,8 @@ export class HotelSetupComponent {
   ngOnInit(): void {
     const  user = localStorage.getItem('user')
     this.user = this.decryptUserData(user!)
+
+    console.log(this.user)
 
     this.aminities();
     this.states();
@@ -85,8 +89,17 @@ saveForm() {
   this.submitted = true;
   this.hotelForm.patchValue({images:this.images})
   if (this.hotelForm.valid) {
+    this.btnLoading = true
     this.api.post('property/store',this.hotelForm.value).subscribe((res:any)=>{
+      const resID = res.data.user.property_id
+      const user:any = localStorage.getItem('user')
+      const userDec = this.decryptUserData(user)
+      if(resID != userDec.property_id ){
+        const encryptedUser = this.encryptUserData(res.data.user);
+        localStorage.setItem('user', encryptedUser);
+      }
       this.showSuccess(res.message);
+      this.btnLoading = false
    });
   } else {
     console.log('Form is invalid');
@@ -144,7 +157,10 @@ get f(): { [key: string]: AbstractControl } {
 }
 
 get_hotel(){
+  this.loading = true
   this.api.post('property/list',{"user_id":this.user.id}).subscribe((res:any)=>{
+
+ this.loading = false
       const hotel = res.data;
 
       var  aminities:any = [];
@@ -176,6 +192,7 @@ get_hotel(){
       postol_code: hotel.postol_code,
     })
  });
+
 }
 
 decryptUserData(encryptedData: string): any {
@@ -183,5 +200,8 @@ decryptUserData(encryptedData: string): any {
   const decryptedData = JSON.parse(decryptedBytes.toString(enc.Utf8));
   return decryptedData;
 }
-
+encryptUserData(user: any): string {
+  const encryptedData = AES.encrypt(JSON.stringify(user), 'encryption-secret-key').toString();
+  return encryptedData;
+}
 }
