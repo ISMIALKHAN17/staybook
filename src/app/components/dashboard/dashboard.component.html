@@ -1,0 +1,102 @@
+<div class="global_component_wrap">
+    <div class="global_component_header h-radius">
+        <h4>Whole data about your business here</h4>
+    </div>
+    <div class="row align-items-center p-2">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="dashboard_wrap">
+                        <h3><span><img src="../../../assets/img/icons/door.png" alt=""></span> Arrivals</h3>
+                    <h2>25</h2>
+                    <span>Arrived: 16</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard_wrap">
+                        <h3><span><img src="../../../assets/img/icons/dep.png" alt=""></span> Departure</h3>
+                    <h2>40</h2>
+                    <span>Departured: 16</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard_wrap">
+                        <h3><span><img src="../../../assets/img/icons/inHouse.png" alt=""></span> In House</h3>
+                    <h2>25</h2>
+                    <span>Stayovers*</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard_wrap">
+                        <h3><span><img src="../../../assets/img/icons/available.png" alt=""></span> Available</h3>
+                    <h2>70</h2>
+                    <span>Available: 56%</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard_wrap">
+                        <h3><span><img src="../../../assets/img/icons/occupied.png" alt=""></span> Occupied</h3>
+                    <h2>30</h2>
+                    <span>Arrived: 16</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard_wrap">
+                        <h3><span><img src="../../../assets/img/icons/revPar.png" alt=""></span> RevPar</h3>
+                    <h2>90</h2>
+                    <span>Arrived: 16</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard_wrap">
+                        <h3><span><img src="../../../assets/img/icons/adr.png" alt=""></span> ADR</h3>
+                    <h2>25</h2>
+                    <span>Arrived: 16</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard_wrap">
+                        <h3><span><img src="../../../assets/img/icons/OOS.png" alt=""></span> OOS</h3>
+                    <h2>25</h2>
+                    <span>Arrived: 16</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="occupancy_wrap">
+                <h3>Occupancy type</h3>
+                <div>
+                    <canvas id="pieChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="p-2">
+        <h3>Revenue stats</h3>
+        <div class="row p-2">
+            <div class="col-md-6 chartFilter">
+                <ul class="d-flex gap-2  m-0">
+                    <li><span [ngClass]="{'activeFilter': filter == 'week'}" (click)="setFilter('week')">Week</span></li>
+                    <li><span [ngClass]="{'activeFilter': filter == 'month'}" (click)="setFilter('month')">Month</span></li>
+                    <li><span [ngClass]="{'activeFilter': filter == 'year'}" (click)="setFilter('year')">Year</span></li>
+                </ul>
+                <p><i class="fa-solid fa-circle"></i> Rooms revenue</p>
+            </div>
+            <div class="col-md-6">
+                <div class="revenueStats">
+                    <p>Total Revenue</p>
+                    <h5>Rs 32,3000</h5>
+                    <span><span><i class="fa-solid fa-arrow-trend-up"></i> 8.3%</span> Last 7 days</span>
+                </div>
+            </div>
+        </div>
+        
+        <div>
+           <div>
+            <canvas id="lineChart"></canvas>
+           </div>
+            
+          </div>
+    </div>
+</div>

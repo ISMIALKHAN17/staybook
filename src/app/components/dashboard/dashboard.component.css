@@ -1,0 +1,53 @@
+#pieChart {
+    width: 400px; 
+    height: 400px;
+  }
+
+  .chartFilter span {
+    color: #000;
+    font-size: 18px;
+    font-weight: 500;
+    background: var(--secondory-color);
+    padding: 5px 11px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.chartFilter span.activeFilter{
+    background: var(--main-color);
+    color: #fff;
+}
+
+.revenueStats {
+    text-align: end;
+}
+
+.revenueStats p {
+    margin: 0;
+    color: #000;
+    font-size: 20px;
+}
+
+.revenueStats h5 {
+    font-size: 32px;
+    margin: 0;
+}
+
+.revenueStats span > span {
+    color: var(--green);
+}
+
+.revenueStats span {
+    font-size: 18px;
+}
+
+.chartFilter p {
+    font-size: 20px;
+    color: #000;
+    margin-top: 15px;
+}
+
+.chartFilter p i {
+    color: var(--green);
+}

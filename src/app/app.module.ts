@@ -19,6 +19,7 @@ import { RoomsComponent } from './components/rooms/rooms.component';
 import { RatePlanComponent } from './components/rate-plan/rate-plan.component';
 import { BookingsComponent } from './components/bookings/bookings.component';
 import { ReportsComponent } from './components/reports/reports.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +33,7 @@ import { ReportsComponent } from './components/reports/reports.component';
     RatePlanComponent,
     BookingsComponent,
     ReportsComponent,
+    DashboardComponent,
     
   ],
   imports: [
