@@ -12,21 +12,21 @@ export class DashboardComponent {
   dataChart:any
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
     this.createPieChart()
     const ctx: any = document.getElementById('lineChart');
 this.dataChart = new Chart(ctx, {
   type: 'line',
   data: {
     labels: [],
-    datasets: [{
+    datasets: [
+      {
       label: 'Rooms revenue',
       data: [10, 20, 30, 40, 50, 60, 70],
       borderColor: '#27c627',
       fill: false,
-      tension: 0.4  // Adjust the tension value for smooth lines (0.0 to 1.0)
-    }]
+      tension: 0.4  
+    }
+  ]
   },
   options: {
     responsive: true,
@@ -35,7 +35,6 @@ this.dataChart = new Chart(ctx, {
 });
 this.updateChartData()
   }
-
   createPieChart() {
     const ctx: any = document.getElementById('pieChart');
     this.pieChart = new Chart(ctx, {
@@ -59,11 +58,9 @@ setFilter(filter: string) {
   this.filter = filter;
   this.updateChartData();
 }
-
 updateChartData() {
   let data: number[] = [];
   let labels: string[] = [];
-  
   if (this.filter === 'week') {
     data = [15, 25, 35, 45, 55, 65, 75];
     labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -81,7 +78,6 @@ updateChartData() {
   });
   this.dataChart.update();
 }
-
 generateMonthLabels(): string[] {
   const labels: string[] = [];
   const currentDate = new Date();
@@ -93,7 +89,6 @@ generateMonthLabels(): string[] {
   }
   return labels;
 }
-
 generateYearLabels(): string[] {
   const labels: string[] = [];
   const currentDate = new Date();

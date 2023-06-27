@@ -35,6 +35,7 @@ export class RatePlanComponent {
   rateplane_id:any;
   aminites_list:any = [];
   removeImages:any = [];
+  loading:any = false
 //   rooms=[
 //     {
 //     roomId:1,
@@ -64,6 +65,7 @@ constructor(private calendar: NgbCalendar,  private toastService: ToastService, 
   this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
   const user = localStorage.getItem('user');
   this.user = this.decryptUserData(user!);
+  console.log(this.user)
   this.rateplans();
 
 }
@@ -306,8 +308,10 @@ isRoomSelected(room: any) {
   }
 
 rateplans(){
+  this.loading = true
   this.api.post('rate_plan/list', {"property_id":this.user.property_id}).subscribe((res: any) => {
     this.Rateplans = res.data.data;
+    this.loading = false
     this.modalService.dismissAll();
   });
 

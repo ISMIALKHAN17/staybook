@@ -20,6 +20,7 @@ import { RatePlanComponent } from './components/rate-plan/rate-plan.component';
 import { BookingsComponent } from './components/bookings/bookings.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ReservationComponent } from './components/reservation/reservation.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +35,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     BookingsComponent,
     ReportsComponent,
     DashboardComponent,
-    
+    ReservationComponent,
   ],
   imports: [
     BrowserModule,

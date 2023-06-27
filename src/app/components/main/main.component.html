@@ -14,13 +14,10 @@
             <span class="name">Staybook</span>
           </div>
         </div>
-
         <i class='fa-solid fa-chevron-right toggle' (click)="toggleSidebar()"></i>
       </header>
-
       <div class="menu-bar">
         <div class="menu">
-
           <ul class="menu-links">
             <li class="nav-link" routerLinkActive="active">
               <a routerLink="home">
@@ -42,7 +39,7 @@
               </a>
             </li>
             <li class="nav-link" routerLinkActive="active">
-              <a routerLink="company">
+              <a routerLink="stays">
                 <i class="fa-solid fa-house-circle-check icon"></i>
                 <span class="text nav-text">Stays</span>
               </a>
@@ -78,7 +75,7 @@
               </a>
             </li>
             <li class="nav-link">
-              <a href="#">
+              <a (click)="logout()">
                 <i class="fa-solid fa-arrow-right-from-bracket icon"></i>
                 <span class="text nav-text">Sign Out</span>
               </a>
@@ -87,10 +84,6 @@
         </div>
         <div class="bottom-content">
           <li>
-            <a (click)="logout()">
-              <i class='bx bx-log-out icon'></i>
-              <span class="text nav-text">Sign Out</span>
-            </a>
           </li>
         </div>
       </div>
@@ -99,7 +92,7 @@
         <div class="header d-flex justify-content-between align-items-center">
             <h2>Home</h2>
             <div class="header_side d-flex gap-2 align-items-center">
-          <button class="theme_btn">Reservation <i class="fa-solid fa-circle-plus"></i></button>
+          <button class="theme_btn" (click)="open(booking)">Reservation <i class="fa-solid fa-circle-plus"></i></button>
               <div class="hotel_status">
                 <span> Hotel Status</span>
                 <label class="switch">
@@ -115,7 +108,7 @@
                         <img src="../../../assets/img/user_placeholder.jpg" alt="">
                     </div>
                     <div class="user_info">
-                        <h4>Ismail</h4>
+                        <h4>{{userData.name}}</h4>
                         <h6>Admin</h6>
                     </div>
                 </div>
@@ -124,3 +117,184 @@
             <router-outlet></router-outlet>
     </section>
   </div>
+  <ng-template #booking let-c="close" let-d="dismiss"  id="draggableElement">
+    <div class="global_component_wrap reservation_modal">
+      <div class="main">
+        <div class="global_component_header h-radius">
+          <h4 class="d-flex justify-content-between">   Rooms </h4>
+        </div>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="row p-2">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="g_input_wrap">
+                    <div class="g_input">
+                      <input type="date" #startDateInput placeholder="Start Date" [min]="todayDate()" formControlName="startDate">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="g_input_wrap">
+                    <div class="g_input">
+                      <input type="date" (change)="calculateTotalNights()" #endDateInput [min]="endDateMinDate" placeholder="End Date" formControlName="endDate">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="g_input_wrap">
+                <div class="g_input">
+                  <input type="text" readonly placeholder="Total Nights" formControlName="totalNights">
+                </div>
+              </div>
+              <div class="global_component_header h-radius">
+                <h4 class="d-flex justify-content-between"> Room </h4>
+              </div>
+              <div class="dialog-box-content">
+                <div class="row">
+                  <div class="room_content">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="g_input_wrap mt-2">
+                          <div class="g_input">
+                            <select name="room" formControlName="room_id" id="roomSelect" (change)="onRoomSelect($event)">
+                              <option disabled selected value="Select Room">Select Room</option>
+                              <option *ngFor="let room of this.rooms" value="{{room.id}}">{{room.room}}</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="g_input_wrap">
+                          <div class="g_input">
+                            <input type="text" placeholder="Adults" formControlName="adults">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="g_input_wrap">
+                          <div class="g_input">
+                            <input type="text" placeholder="Kids" formControlName="kids">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                 
+                    <div class="bed_size" *ngIf="selectedRoom">
+                      <h4>
+                        {{selectedRoom.room}}
+                        <span>
+                        </span>
+                      </h4>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="icon">
+                            <p>
+                              <i class="fa fa-eye"></i>
+                              Single beds
+                              <span>
+                                ({{selectedRoom.singleBed}})
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="icon">
+                            <p>
+                              <i class="fa fa-eye"></i>
+                              Double beds
+                              <span>
+                                ({{selectedRoom.doubleBed}})
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="icon">
+                            <p>
+                              <i class="fa fa-eye"></i>
+                              Max Sleeps
+                              <span>
+                                ({{selectedRoom.maximumSleep}})
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+                        <div class="col-md-6 ">
+                          <div class="icon">
+                            <p>
+                              <i class="fa fa-eye"></i>
+                              Room Size
+                              <span>
+                                ({{selectedRoom.size}})
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="g_input_wrap">
+                    <div class="g_input">
+                      <input type="text" placeholder="First name" formControlName="firstName">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="g_input_wrap">
+                    <div class="g_input">
+                      <input type="text" placeholder="Last name" formControlName="lastName">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="g_input_wrap">
+                <div class="g_input">
+                  <input type="text" placeholder="Email" formControlName="email">
+                  <div *ngIf="form.controls.email.errors?.required" class="error-message">Email is required</div>
+                  <div *ngIf="form.controls.email.errors?.email" class="error-message">Invalid email address</div>
+                </div>
+              </div>
+              <div class="g_input_wrap">
+                <div class="g_input">
+                  <input type="text" placeholder="Phone Number" formControlName="phoneNumber">
+                </div>
+              </div>
+              <div class="g_input_wrap">
+                <div class="g_input">
+                  <input type="text" placeholder="CNIC or Identity number" formControlName="cnic">
+                </div>
+              </div>
+              <div class="g_input_wrap">
+                <div class="g_input">
+                  <input type="text" placeholder="Sub Total" formControlName="subTotal">
+                </div>
+              </div>
+              <div class="g_input_wrap">
+                <div class="g_input">
+                  <input type="text" placeholder="Discount" formControlName="discount">
+                </div>
+              </div>
+              <div class="g_input_wrap">
+                <div class="g_input">
+                  <input type="text" placeholder="Total" formControlName="total">
+                </div>
+              </div>
+              <div class="d-flex justify-content-end">
+                <button type="submit"  class="theme_btn m-2">Reserve</button>
+              </div>
+            </div>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </ng-template>

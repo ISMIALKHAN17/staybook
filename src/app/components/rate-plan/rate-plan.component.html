@@ -1,4 +1,7 @@
 <div class="global_component_wrap">
+    <div class="componentLoaderWrap" *ngIf="loading">
+        <span class="componentLoader"></span>
+      </div>
     <div class="main" *ngFor="let rate of Rateplans">
 
 

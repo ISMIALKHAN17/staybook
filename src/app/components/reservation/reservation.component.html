@@ -1,0 +1,344 @@
+<div class="global_component_wrap overflow-scroll globalScroll">
+    <div class="global_component_header h-radius">
+    </div>
+   <ul class="d-flex gap-2 p-1 reservation_date_row m-0">
+    <li>
+        <div class="availbilitiy text-center">
+            <h3>AVAILBILITY</h3>
+            <h4>Room Type</h4>
+        </div>
+    </li>
+    <li>
+        <div class="date_wrap text-center">
+            <p>April</p>
+            <h3>01</h3>
+            <p>Monday</p>
+        </div>
+    </li>
+    <li>
+        <div class="date_wrap text-center">
+            <p>April</p>
+            <h3>02</h3>
+            <p>Tuesday</p>
+        </div>
+    </li>
+    <li>
+        <div class="date_wrap text-center">
+            <p>April</p>
+            <h3>03</h3>
+            <p>Wednesday</p>
+        </div>
+    </li>
+    <li>
+        <div class="date_wrap text-center">
+            <p>April</p>
+            <h3>04</h3>
+            <p>Thursday</p>
+        </div>
+    </li>
+    <li>
+        <div class="date_wrap text-center">
+            <p>April</p>
+            <h3>05</h3>
+            <p>Friday</p>
+        </div>
+    </li>
+    <li>
+        <div class="date_wrap text-center">
+            <p>April</p>
+            <h3>06</h3>
+            <p>Saturday</p>
+        </div>
+    </li>
+    <li>
+        <div class="date_wrap text-center">
+            <p>April</p>
+            <h3>07</h3>
+            <p>Sunday</p>
+        </div>
+    </li>
+   </ul>
+   <ul class="d-flex gap-2 p-1 reservation_rooms_row m-0">
+    <li>
+        <div class="availbilitiy text-center">
+            <h3 type="button"
+            (click)="isSingleCollapsed = ! isSingleCollapsed"
+            [attr.aria-expanded]="!isSingleCollapsed"
+            aria-controls="collapseExample">
+            Single 
+            <i [ngClass]="{'showRoomsArrow': !isSingleCollapsed , 'closeRoomsArrow': isSingleCollapsed }" class="fa-solid fa-chevron-down"></i>
+        </h3>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center">
+            <p><i class="fa-regular fa-calendar-check"></i> 5 Available</p>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center">
+            <p><i class="fa-regular fa-calendar-check"></i> 5 Available</p>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center">
+            <p><i class="fa-regular fa-calendar-check"></i> 5 Available</p>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center">
+            <p><i class="fa-regular fa-calendar-check"></i> 5 Available</p>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center">
+            <p><i class="fa-regular fa-calendar-check"></i> 5 Available</p>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center">
+            <p><i class="fa-regular fa-calendar-check"></i> 5 Available</p>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center">
+            <p><i class="fa-regular fa-calendar-check"></i> 5 Available</p>
+        </div>
+    </li>
+   </ul>
+   <ul class="d-flex gap-2 p-1 reservation_economical_rooms_row m-0 collapse" #collapse="ngbCollapse" [(ngbCollapse)]="isSingleCollapsed">
+    <li>
+        <div class="availbilitiy text-center">
+           <h3>
+            EC - 101 
+           </h3>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center availableRoom">
+            <h3>2,000</h3>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center bookedRoom">
+            <h3>Imran</h3>
+            <span>3,000</span>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center availableRoom">
+            <h3>3,000</h3>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center bookedRoom">
+            <h3>Kashif</h3>
+            <span>3,000</span>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center availableRoom">
+            <h3>3,000</h3>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center availableRoom">
+            <h3>5,000</h3>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center bookedRoom">
+            <h3>Asif </h3>
+            <span>5,000</span>
+        </div>
+    </li>
+   </ul>
+   <ul class="d-flex gap-2 p-1 reservation_economical_rooms_row m-0 collapse" #collapse="ngbCollapse" [(ngbCollapse)]="isSingleCollapsed">
+    <li>
+        <div class="availbilitiy text-center">
+           <h3>
+            EC - 102 
+           </h3>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center availableRoom">
+            <h3>2,000</h3>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center bookedRoom">
+            <h3>Imran</h3>
+            <span>3,000</span>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center availableRoom">
+            <h3>3,000</h3>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center bookedRoom">
+            <h3>Kashif</h3>
+            <span>3,000</span>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center availableRoom">
+            <h3>3,000</h3>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center availableRoom">
+            <h3>5,000</h3>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center bookedRoom">
+            <h3>Asif </h3>
+            <span>5,000</span>
+        </div>
+    </li>
+   </ul>
+   <ul class="d-flex gap-2 p-1 reservation_economical_rooms_row m-0 collapse" #collapse="ngbCollapse" [(ngbCollapse)]="isSingleCollapsed">
+    <li>
+        <div class="availbilitiy text-center">
+           <h3>
+            EC - 103
+           </h3>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center availableRoom">
+            <h3>2,000</h3>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center bookedRoom">
+            <h3>Imran</h3>
+            <span>3,000</span>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center availableRoom">
+            <h3>3,000</h3>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center bookedRoom">
+            <h3>Kashif</h3>
+            <span>3,000</span>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center availableRoom">
+            <h3>3,000</h3>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center availableRoom">
+            <h3>5,000</h3>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center bookedRoom">
+            <h3>Asif </h3>
+            <span>5,000</span>
+        </div>
+    </li>
+   </ul>
+   <ul class="d-flex gap-2 p-1 reservation_rooms_row m-0">
+    <li>
+        <div class="availbilitiy text-center">
+            <h3 type="button"
+            (click)="isDoubleCollapsed = ! isDoubleCollapsed"
+            [attr.aria-expanded]="!isDoubleCollapsed"
+            aria-controls="collapseExample">Double 
+            <i [ngClass]="{'showRoomsArrow': !isDoubleCollapsed , 'closeRoomsArrow': isDoubleCollapsed }" class="fa-solid fa-chevron-down"></i>
+        </h3>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center">
+            <p><i class="fa-regular fa-calendar-check"></i> 5 Available</p>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center">
+            <p><i class="fa-regular fa-calendar-check"></i> 5 Available</p>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center">
+            <p><i class="fa-regular fa-calendar-check"></i> 5 Available</p>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center">
+            <p><i class="fa-regular fa-calendar-check"></i> 5 Available</p>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center">
+            <p><i class="fa-regular fa-calendar-check"></i> 5 Available</p>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center">
+            <p><i class="fa-regular fa-calendar-check"></i> 5 Available</p>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center">
+            <p><i class="fa-regular fa-calendar-check"></i> 5 Available</p>
+        </div>
+    </li>
+   </ul>
+   <ul class="d-flex gap-2 p-1 reservation_economical_rooms_row m-0 collapse" #collapse="ngbCollapse" [(ngbCollapse)]="isDoubleCollapsed">
+    <li>
+        <div class="availbilitiy text-center">
+           <h3>
+            EC - 103
+           </h3>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center availableRoom">
+            <h3>4,000</h3>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center bookedRoom">
+            <h3>Imran</h3>
+            <span>4,000</span>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center availableRoom">
+            <h3>4,000</h3>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center bookedRoom">
+            <h3>Kashif</h3>
+            <span>4,000</span>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center availableRoom">
+            <h3>4,000</h3>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center availableRoom">
+            <h3>8,000</h3>
+        </div>
+    </li>
+    <li>
+        <div  class="date_wrap text-center bookedRoom">
+            <h3>Asif </h3>
+            <span>8,000</span>
+        </div>
+    </li>
+   </ul>
+</div>

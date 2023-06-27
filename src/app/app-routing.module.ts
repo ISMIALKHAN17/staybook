@@ -7,6 +7,7 @@ import { RatePlanComponent } from './components/rate-plan/rate-plan.component';
 import { BookingsComponent } from './components/bookings/bookings.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ReservationComponent } from './components/reservation/reservation.component';
 
 const routes: Routes = [
   {path:'home', component:HomeComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path:'bookings', component:BookingsComponent},
   {path:'reports', component:ReportsComponent},
   {path:'dashboard', component:DashboardComponent},
+  {path:'stays', component:ReservationComponent},
 ];
 
 @NgModule({

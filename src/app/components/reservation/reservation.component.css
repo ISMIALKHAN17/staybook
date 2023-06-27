@@ -1,0 +1,106 @@
+.availbilitiy {
+    background-color: var(--main-color);
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+}
+.availbilitiy h3 {
+    color: #fff;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 10px;
+    margin-bottom: 0px;
+    font-size: 25px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.availbilitiy h4 {
+    color: #fff;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin: 0;
+}
+.reservation_rooms_row li , .reservation_date_row li , .reservation_economical_rooms_row li{
+    width: 182px;
+}
+.reservation_date_row li {
+    height: 140px;
+}
+.reservation_rooms_row li {
+    height: 50px;
+}
+.reservation_economical_rooms_row li{
+    height: 140px;
+}
+.reservation_rooms_row li .availbilitiy h3{
+    font-size: 15px;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+.reservation_rooms_row li .availbilitiy h3 i.showRoomsArrow {
+    transform: none;
+    transition: 0.3s;
+}
+.closeRoomsArrow {
+    transform: rotate(-90deg);
+    transition: 0.3s;
+}
+.reservation_date_row li div  , .reservation_rooms_row li div , .reservation_economical_rooms_row li div{
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--main-color);
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    gap: 10px;
+}
+.reservation_rooms_row li div{
+    border-radius: 5px;
+}
+.reservation_rooms_row .date_wrap {
+    background-color: #728EA4 !important;
+}
+.date_wrap h3 ,.date_wrap p {
+    color: #fff;
+    margin: 0;
+}
+.date_wrap h3 {
+    font: 20px;
+}
+.reservation_date_row {
+    width: fit-content;
+}
+.collapse{
+display: none !important;
+}
+.collapse.show{
+display: flex !important;
+}
+.availableRoom {
+    background-color: var(--availableBlue) !important;
+}
+.bookedRoom {
+    background-color: var(--bookedGreen) !important;
+}
+.reservation_economical_rooms_row .date_wrap h3 {
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    padding: 20px 0px;
+    text-transform: capitalize;
+}
+
+.bookedRoom span {
+    position: absolute;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    bottom: 5px;
+    right: 15px;
+}
+
+.date_wrap.text-center.bookedRoom {
+    position: relative;
+}
+
