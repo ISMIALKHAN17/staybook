@@ -159,7 +159,7 @@
                           <div class="g_input">
                             <select name="room" formControlName="room_id" id="roomSelect" (change)="onRoomSelect($event)">
                               <option disabled selected value="Select Room">Select Room</option>
-                              <option *ngFor="let room of this.rooms" value="{{room.id}}">{{room.room}}</option>
+                              <option *ngFor="let room of this.rooms" value="{{room.id}}">{{room.display_name}}</option>
                             </select>
                           </div>
                         </div>
@@ -182,7 +182,7 @@
                  
                     <div class="bed_size" *ngIf="selectedRoom">
                       <h4>
-                        {{selectedRoom.room}}
+                        {{selectedRoom.display_name}}
                         <span>
                         </span>
                       </h4>
@@ -193,7 +193,7 @@
                               <i class="fa fa-eye"></i>
                               Single beds
                               <span>
-                                ({{selectedRoom.singleBed}})
+                                ({{selectedRoom.single_bed}})
                               </span>
                             </p>
                           </div>
@@ -204,7 +204,7 @@
                               <i class="fa fa-eye"></i>
                               Double beds
                               <span>
-                                ({{selectedRoom.doubleBed}})
+                                ({{selectedRoom.double_bed}})
                               </span>
                             </p>
                           </div>
@@ -217,7 +217,7 @@
                               <i class="fa fa-eye"></i>
                               Max Sleeps
                               <span>
-                                ({{selectedRoom.maximumSleep}})
+                                ({{selectedRoom.maximum_sleep}})
                               </span>
                             </p>
                           </div>
@@ -275,7 +275,7 @@
               </div>
               <div class="g_input_wrap">
                 <div class="g_input">
-                  <input type="text" placeholder="Sub Total" formControlName="subTotal">
+                  <input type="text" placeholder="Sub Total" readonly formControlName="subTotal">
                 </div>
               </div>
               <div class="g_input_wrap">
@@ -285,7 +285,7 @@
               </div>
               <div class="g_input_wrap">
                 <div class="g_input">
-                  <input type="text" placeholder="Total" formControlName="total">
+                  <input type="text" placeholder="Total" readonly formControlName="total">
                 </div>
               </div>
               <div class="d-flex justify-content-end">

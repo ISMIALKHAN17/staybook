@@ -18,6 +18,8 @@ export class MainComponent {
   form :any
   rooms:any
   selectedRoom:any
+  weekdays:any
+  weekends:any
   constructor(private api: RequestService, private Router:Router ,private DataEncrypt:DataEncryptService, private modalService:NgbModal , private formBuilder: FormBuilder ) {}
   ngOnInit(): void {
     const user:any = localStorage.getItem('user')
@@ -40,6 +42,7 @@ export class MainComponent {
     });
   }
   calculateTotalNights() {
+    this.form.controls.room_id.setValue('Select Room');
     const startDate = this.form.controls.startDate.value;
     const endDate = this.form.controls.endDate.value;
     if (startDate && endDate) {
@@ -48,7 +51,6 @@ export class MainComponent {
       const timeDiff = Math.abs(end.getTime() - start.getTime());
       const totalNights = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
       this.form.controls.totalNights.setValue(totalNights);
-  
       let weekdays = 0;
       let weekends = 0;
       const currentDate = new Date(start);
@@ -61,11 +63,11 @@ export class MainComponent {
         }
         currentDate.setDate(currentDate.getDate() + 1);
       }
-  
+      this.weekdays = weekdays
+      this.weekends = weekends
       console.log('Weekdays:', weekdays);
       console.log('Weekends:', weekends);
     }
-  
     this.api.post('reservation/detail', { 'property_id': this.userData.property_id }).subscribe(
       (res: any) => {
         this.rooms = res.data;
@@ -115,13 +117,18 @@ onRoomSelect(event: Event) {
   const selectedRoomId = (event.target as HTMLSelectElement).value;
   const selectedRoom = this.rooms.find((room:any) => room.id == selectedRoomId );
   this.selectedRoom = selectedRoom
+ let weekdaysPrice =  parseInt(selectedRoom.rate_plan.week_days_price) * this.weekdays
+ let weekdendPrice =  parseInt(selectedRoom.rate_plan.weekends_price) * this.weekends
+ this.form.controls.subTotal.setValue(weekdaysPrice+weekdendPrice);
+ this.form.controls.total.setValue(weekdaysPrice+weekdendPrice);
 }
 setEndDateMinDate(startDateValue: string): void {
   this.endDateMinDate = startDateValue;
 }
-
 onSubmit() {
-  console.log(this.form.value)
+ this.api.post('reservation/room',this.form.value).subscribe((res)=>{
+  console.log(res)
+ })
 }
 
 }
